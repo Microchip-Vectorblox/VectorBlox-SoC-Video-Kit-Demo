@@ -309,17 +309,14 @@ if {[info exists HSS_UPDATE]} {
       }
      }
   
-  create_eNVM_config "$local_dir/script_support/MSS_VIDEO_KIT/ENVM.cfg" "$local_dir/script_support/hss-envm-wrapper.mpfs-video-kit.hex"
+  create_eNVM_config "$local_dir/script_support/MSS_VIDEO_KIT/ENVM.cfg" "../script_support/hss-envm-wrapper.mpfs-video-kit.hex"
   run_tool -name {GENERATEPROGRAMMINGDATA}
   configure_envm -cfg_file {script_support/MSS_VIDEO_KIT/ENVM.cfg}
-}
+} elseif {[info exists GENERATE_PROGRAMMING_DATA]} {
+    run_tool -name {GENERATEPROGRAMMINGDATA} 
+} 
 
-if {[info exists GENERATE_PROGRAMMING_DATA]} {
-    run_tool -name {GENERATEPROGRAMMINGDATA} 
-}  elseif {[info exists PROGRAM]} {
-    run_tool -name {GENERATEPROGRAMMINGDATA} 
-    run_tool -name {PROGRAMDEVICE}
-} elseif {[info exists EXPORT_FPE]} {   
+if {[info exists EXPORT_FPE]} {   
     if {[info exists HSS_UPDATE]} {
         if {$EXPORT_FPE == 1} {
             export_fpe_job $project_name $local_dir "ENVM FABRIC SNVM"

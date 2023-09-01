@@ -111,6 +111,10 @@ cd sdk/example/soc-video-c
     - Entering `a` highlights the largest face on-screen in `RED`, entering `a` again adds that face to the embeddings. You will then be prompted to enter a name (or just press `ENTER` to use a default ID).
     - Entering `d` will list the indices and names of the embeddings. Enter the desired index to delete the specified embedding from the database (or press `ENTER` to skip deletion).
 
+
+Samples videos for input to the Faces Recognition and License Plate Recognition modes are available [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SampleFaces.mp4) and [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SamplePlates.mp4).
+
+
 Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
 Raspberry Pi is a trademark of the Raspberry Pi Foundation.
 All other trademarks are the property of their respective owners.
