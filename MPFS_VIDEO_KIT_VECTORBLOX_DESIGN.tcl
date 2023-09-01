@@ -305,7 +305,8 @@ if {[info exists PLACEROUTE]} {
 
 if {[info exists HSS_UPDATE]} {
   if !{[file exists "./script_support/hss-envm-wrapper.mpfs-video-kit.hex"]} {
-      if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/latest/download/hss-envm-wrapper.mpfs-video-kit.hex -P ./script_support/} issue]} {
+      if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/download/v2023.02.1/hss-envm-wrapper.mpfs-video-kit.hex -P ./script_support/} issue]} {
+	  
       }
      }
   

@@ -1,8 +1,10 @@
-# PolarFire&reg; SoC Video Kit VectorBlox Demo Generation Tcl Scripts - Libero&reg; SoC v2023.1+
+![](media/demo.gif)
+
+# PolarFire&reg; SoC Video Kit VectorBlox Demo Generation Scripts
 
 ## Table of Contents
 
-- [PolarFire&reg; SoC Video Kit VectoBlox Demo Generation Tcl Scripts - Libero&reg; SoC v2023.1+](#polarfire-soc-video-kit-vectorblox-demo-generation-tcl-scripts---libero-soc-v20231)
+- [PolarFire&reg; SoC Video Kit VectoBlox Demo Generation Scripts](#polarfire-soc-video-kit-vectorblox-demo-generation-scripts)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Using the Vectorblox design generation Tcl script](#using-the-reference-design-generation-tcl-script)
@@ -18,7 +20,7 @@
 <a name="description"></a>
 ## Description
 
-This repository can be used to generate a VectorBlox demo using the PolarFire SoC Video Kit. The demo can be used to accelerate VNNX neural networks on embedded Linux on PolarFire SoC, including a full HDMI pipeline. A Libero SoC Tcl script is provided to generate the design using Libero SoC along with device specific I/O constraints.
+This repository can be used to generate a VectorBlox demo using the PolarFire SoC Video Kit. A Libero SoC Tcl script is provided to generate the design using Libero SoC along with device specific I/O constraints.
 
 This repository supports Libero SoC v2023.1, which is available for download [here](https://www.microsemi.com/product-directory/design-resources/1750-libero-soc#downloads).
 
@@ -60,6 +62,8 @@ Below arguments are supported to modify or configure aspects of the design flow 
 ## Programming the FPGA
 
 Once the script has completed the design can be configured further if needed and the Libero SoC design flow can be run by double clicking on a stage in the design flow on the left hand side of Libero. Selecting an option requiring previous steps to be completed will run the full flow, i.e double clicking "Run Program Action" will run any required steps, such as, "Synthesize", "Place and Route", etc and then program the device.
+
+Alternatively, the provided `.job` files can be used to program the board via FlashPro Express 
 
 <a name="board-configuration"></a>
 ## Board configuration
