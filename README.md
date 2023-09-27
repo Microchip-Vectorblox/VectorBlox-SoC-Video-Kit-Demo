@@ -85,35 +85,39 @@ Program the [2023.02.1 Yocto image](https://github.com/polarfire-soc/meta-polarf
 ## Building the demo
 
 - Login as `root` (on MMUART1 or via ssh over ethernet)
-- Download and unzip the [VectorBlox SDK 1.4.4 sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_1.4.4.zip)    
+- Download and unzip the [sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_1.4.4.zip) to the root directory
+    ```
+    wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_1.4.4.zip 
 
-```
-wget --no-check-certificate \
-     https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_1.4.4.zip
+    unzip samples_V1000_1.4.4.zip
+    ```
+- Download and unzip the [Vectorblox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v1.4.4.1.zip), and navigate to this example
 
-unzip samples_V1000_1.4.4.zip
-```
+    ```
+    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v1.4.4.1.zip 
 
-- Download and unzip the [VectorBlox SDK](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/EAP/sdk_1.4.4.zip)    
+    unzip release-v1.4.4.1.zip
+    cd VectorBlox-SDK-release-v1.4.4.1/example/soc-video-c
+    ```
+- HDMI cables connected to the PolarFire SoC Video Kit (Rx/Tx)
+    >Users can run `make hdmi` to toggle the frame buffers (for 60 frames) to verify their HDMI setup
+## Starting the VectorBlox HDMI demo on the PolarFire SoC Video Kit
 
-```
-wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/EAP/sdk_1.4.4.zip
-unzip sdk_1.4.4.zip
-cd sdk/example/soc-video-c
-```
-- Run `make hdmi` to test the HDMI feed is working (runs 60 frames). Unplug and plug HDMI input if not working 
 - Run `make overlay` to add the Vectorblox instance to the device tree (required every boot)
 - Run `make` to build the demo application
-- Run `./run-video-model` to launch the demo.
+- Run `./run-video-model` to launch the demo
 
+## Controlling the VectorBlox HDMI demo on the PolarFire SoC Video Kit
+- The demo consists of the following:
+    - Face Recognition Demo
+    - License Plate Demo
+    - Classification (Mobilenetv2)
+    - Object Detection (YOLOv5 Nano, YOLOv4 Tiny)
+- Use the `ENTER` key to switch modes. Entering `q` (pressing `q` and `ENTER`) quits the demo
+- In the `Face Recognition` mode, you can enter `a` to add or `d` to delete face embeddings
+    - Entering `a` initially highlights the largest face on-screen, entering `a` again adds that face to the embeddings. You will then be prompted to enter a name( or just press `ENTER` to use the default ID)
 
-<a name="demo-controlling"></a>
-## Controlling the demo
-
-- Use the `ENTER` key to switch modes. Entering `q` (pressing `q` then `ENTER`) quits.
-- In `Face Recognition` mode, you can enter `a` to add or `d` to delete face embeddings.
-    - Entering `a` highlights the largest face on-screen in `RED`, entering `a` again adds that face to the embeddings. You will then be prompted to enter a name (or just press `ENTER` to use a default ID).
-    - Entering `d` will list the indices and names of the embeddings. Enter the desired index to delete the specified embedding from the database (or press `ENTER` to skip deletion).
+    - Entering `d` will list hte indices and names of the embeddings. Enter the desired index to delete the specified embedding from the database (or press `ENTER` to skip the deletion)
 
 
 Samples videos for input to the Faces Recognition and License Plate Recognition modes are available [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SampleFaces.mp4) and [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SamplePlates.mp4).

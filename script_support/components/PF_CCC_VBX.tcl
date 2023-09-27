@@ -47,7 +47,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL0_0_FABCLK_USED:true"  \
 "GL0_0_FREQ_SEL:false"  \
 "GL0_0_IS_USED:true"  \
-"GL0_0_OUT_FREQ:260"  \
+"GL0_0_OUT_FREQ:250"  \
 "GL0_0_PHASE_INDEX:0"  \
 "GL0_0_PHASE_SEL:false"  \
 "GL0_0_PLL_PHASE:0"  \
@@ -78,7 +78,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL1_0_FABCLK_USED:true"  \
 "GL1_0_FREQ_SEL:false"  \
 "GL1_0_IS_USED:true"  \
-"GL1_0_OUT_FREQ:130"  \
+"GL1_0_OUT_FREQ:125"  \
 "GL1_0_PHASE_INDEX:0"  \
 "GL1_0_PHASE_SEL:false"  \
 "GL1_0_PLL_PHASE:0"  \
@@ -227,7 +227,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "PLL_POSTDIVIDERADDSOFTLOGIC_0:true"  \
 "PLL_REF_CLK_SEL_0:false"  \
 "PLL_REF_CLK_SEL_1:false"  \
-"PLL_REFDIV_0:11"  \
+"PLL_REFDIV_0:27"  \
 "PLL_REFDIV_1:1"  \
 "PLL_RESET_ON_LOCK_0:true"  \
 "PLL_SPREAD_MODE_0:false"  \

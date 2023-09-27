@@ -77,7 +77,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 	    -die {MPFS250TS} \
 	    -package {FCG1152} \
 	    -speed {-1} \
-	    -die_voltage {1.0} \
+	    -die_voltage {1.05} \
 	    -part_range {IND} \
 	    -adv_options {IO_DEFT_STD:LVCMOS 1.8V} \
 	    -adv_options {RESTRICTPROBEPINS:1} \
@@ -239,11 +239,11 @@ if { [file exists $project_dir/$project_name.prjx] } {
 #
 # // Run the design flow and add eNVM clients 
 #
-
-set LIBERO_INSTALL_DIR [file dirname [file dirname [file dirname [lindex $auto_path 0]]]]
-catch {remove_profile -name synpro} 
-add_profile -name synpro -type synthesis -tool "Synplify Pro ME" -location "$LIBERO_INSTALL_DIR/SynplifyPro/bin/synplify_pro" 
-select_profile -name synpro
+catch {
+    set LIBERO_INSTALL_DIR [file dirname [file dirname [file dirname [lindex $auto_path 0]]]]
+    add_profile -name synpro -type synthesis -tool "Synplify Pro ME" -location "$LIBERO_INSTALL_DIR/SynplifyPro/bin/synplify_pro" 
+    select_profile -name synpro
+}
 
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
@@ -256,7 +256,7 @@ configure_tool -name {VERIFYTIMING} \
     -params {MAX_EXPANDED_PATHS_VIOLATION:0} \
     -params {MAX_PARALLEL_PATHS_TIMING:1} \
     -params {MAX_PARALLEL_PATHS_VIOLATION:1} \
-    -params {MAX_PATHS_INTERACTIVE_REPORT:1} \
+    -params {MAX_PATHS_INTERACTIVE_REPORT:1000} \
     -params {MAX_PATHS_TIMING:5} \
     -params {MAX_PATHS_VIOLATION:20} \
     -params {MAX_TIMING_FAST_HV_LT:1} \
@@ -279,33 +279,22 @@ configure_tool -name {VERIFYTIMING} \
     -params {SMART_INTERACTIVE:1} 
 
 configure_tool -name {PLACEROUTE} \
-    -params {DELAY_ANALYSIS:MAX} \
     -params {EFFORT_LEVEL:true} \
-    -params {GB_DEMOTION:true} \
     -params {INCRPLACEANDROUTE:false} \
-    -params {IOREG_COMBINING:true} \
-    -params {MULTI_PASS_CRITERIA:VIOLATIONS} \
-    -params {MULTI_PASS_LAYOUT:false} \
-    -params {NUM_MULTI_PASSES:5} \
-    -params {PDPR:false} \
-    -params {RANDOM_SEED:0} \
     -params {REPAIR_MIN_DELAY:true} \
-    -params {REPLICATION:true} \
-    -params {SLACK_CRITERIA:WORST_SLACK} \
-    -params {SPECIFIC_CLOCK:} \
-    -params {START_SEED_INDEX:1} \
-    -params {STOP_ON_FIRST_PASS:false} \
-    -params {TDPR:true} 
+    -params {RANDOM_SEED:0}
 
 if {[info exists PLACEROUTE]} {
     run_tool -name {PLACEROUTE}
-} elseif {[info exists VERIFY_TIMING]} {
+} 
+
+if {[info exists VERIFY_TIMING]} {
     run_tool -name {VERIFYTIMING}
 }
 
 if {[info exists HSS_UPDATE]} {
   if !{[file exists "./script_support/hss-envm-wrapper.mpfs-video-kit.hex"]} {
-      if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/download/v2023.02.1/hss-envm-wrapper.mpfs-video-kit.hex -P ./script_support/} issue]} {
+      if {[catch    {exec wget --no-check-certificate https://github.com/polarfire-soc/hart-software-services/releases/download/v2023.02.1/hss-envm-wrapper.mpfs-video-kit.hex -P ./script_support/} issue]} {
 	  
       }
      }

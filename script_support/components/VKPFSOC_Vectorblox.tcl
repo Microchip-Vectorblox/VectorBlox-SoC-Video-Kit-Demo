@@ -147,6 +147,19 @@ sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {VSC_8662_CMODE7} -va
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {VSC_8662_SRESET} -value {VCC}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {cam1inck} -value {GND}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {cam1xmaster} -value {GND}
+# Add axi_arbiter_0 instance
+sd_instantiate_hdl_core -sd_name ${sd_name} -hdl_core_name {axi_arbiter} -instance_name {axi_arbiter_0}
+# Exporting Parameters of instance axi_arbiter_0
+sd_configure_core_instance -sd_name ${sd_name} -instance_name {axi_arbiter_0} -params {\
+"ADDR_WIDTH:32" \
+"DATA_WIDTH:512" \
+"S_ID_WIDTH:7" }\
+-validate_rules 0
+sd_save_core_instance_config -sd_name ${sd_name} -instance_name {axi_arbiter_0}
+sd_update_instance -sd_name ${sd_name} -instance_name {axi_arbiter_0}
+
+
+
 # Add axi_master_scale_updown_bilinear_top_0 instance
 sd_instantiate_hdl_core -sd_name ${sd_name} -hdl_core_name {axi_master_scale_updown_bilinear_top} -instance_name {axi_master_scale_updown_bilinear_top_0}
 sd_invert_pins -sd_name ${sd_name} -pin_names {axi_master_scale_updown_bilinear_top_0:reset}
@@ -179,7 +192,6 @@ sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {BIBUF_2:D} -value {G
 
 # Add CLOCKS_AND_RESETS instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {CLOCKS_AND_RESETS} -instance_name {CLOCKS_AND_RESETS}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {CLOCKS_AND_RESETS:RESETN_150MHz}
 
 
 
@@ -238,6 +250,11 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:MSS_INT_M2F}
 
 
 
+# Add PF_DDR4_C0_0 instance
+sd_instantiate_component -sd_name ${sd_name} -component_name {PF_DDR4_C0} -instance_name {PF_DDR4_C0_0}
+
+
+
 # Add pulse_generator_0 instance
 sd_instantiate_hdl_module -sd_name ${sd_name} -hdl_module_name {pulse_generator} -hdl_file {hdl\pulse_generator.vhd} -instance_name {pulse_generator_0}
 
@@ -249,8 +266,8 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {Video_Pipeline_HDM
 
 
 # Add scalar net connections
-sd_connect_pins -sd_name ${sd_name} -pin_names {"ACT_N" "Video_Pipeline_HDMI_0:ACT_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BG" "Video_Pipeline_HDMI_0:BG" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACT_N" "PF_DDR4_C0_0:ACT_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"BG" "PF_DDR4_C0_0:BG" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_1:E" "MSS:I2C_0_SCL_OE_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_1:PAD" "CAM1_SCL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_1:Y" "MSS:I2C_0_SCL_F2M" }
@@ -263,38 +280,42 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CK" "MSS:CK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CKE" "MSS:CKE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CK_N" "MSS:CK_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_150MHz" "Video_Pipeline_HDMI_0:CLK_150MHz" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_50MHz" "MSS:FIC_3_PCLK" "Video_Pipeline_HDMI_0:CLK_50MHz" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_50MHz" "MSS:FIC_3_PCLK" "PF_DDR4_C0_0:PLL_REF_CLK" "Video_Pipeline_HDMI_0:CLK_50MHz" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_HLS" "COREAXI4INTERCONNECT_C0_0:M_CLK2" "COREAXI4INTERCONNECT_C0_0:M_CLK3" "COREAXI4INTERCONNECT_C0_0:M_CLK4" "FIC0_INITIATOR:S_CLK3" "FIC0_INITIATOR:S_CLK4" "FIC0_INITIATOR:S_CLK5" "axi_master_scale_updown_bilinear_top_0:clk" "axi_master_warpPerspective_top_0:clk" "draw_assist_0:clk" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_MSS" "COREAXI4INTERCONNECT_C0_0:ACLK" "FIC0_INITIATOR:ACLK" "MSS:FIC_0_ACLK" "MSS:FIC_1_ACLK" "pulse_generator_0:pulse_clk" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_VBX" "COREAXI4INTERCONNECT_C0_0:M_CLK1" "FIC0_INITIATOR:S_CLK2" "core_vectorblox_C0_0:clk" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_VBX2" "core_vectorblox_C0_0:clk_2x" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_XCVR_REF" "Video_Pipeline_HDMI_0:REF_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:DDR_CTRLR_READY" "PF_DDR4_C0_0:CTRLR_READY" "Video_Pipeline_HDMI_0:CTRLR_READY" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:DDR_PLL_LOCK" "PF_DDR4_C0_0:PLL_LOCK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:DDR_SYS_CLK" "COREAXI4INTERCONNECT_C0_0:S_CLK0" "PF_DDR4_C0_0:SYS_CLK" "Video_Pipeline_HDMI_0:CLK_DDR" "axi_arbiter_0:clk" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:DEVICE_INIT_DONE" "Video_Pipeline_HDMI_0:INIT_DONE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:DISP_CLK" "Video_Pipeline_HDMI_0:DISP_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:EXT_RST_N" "MSS:MSS_RESET_N_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:FABRIC_POR_N" "MSS:MSS_RESET_N_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:I2C_BCLK" "MSS:I2C_0_BCLK_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:PLL_LOCK" "Video_Pipeline_HDMI_0:PLL_LOCK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:REF_CLK" "Video_Pipeline_HDMI_0:REF_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:REF_CLK_PAD_N" "REF_CLK_PAD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:REF_CLK_PAD_P" "REF_CLK_PAD_P" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_50MHz" "Video_Pipeline_HDMI_0:RESETN_50MHz" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_50MHz" "PF_DDR4_C0_0:SYS_RESET_N" "Video_Pipeline_HDMI_0:RESETN_50MHz" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_DDR" "Video_Pipeline_HDMI_0:RESETN_DDR" "axi_arbiter_0:resetn" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_DISP" "Video_Pipeline_HDMI_0:RESETN_DISP" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_HLS" "axi_master_scale_updown_bilinear_top_0:reset" "axi_master_warpPerspective_top_0:reset" "draw_assist_0:resetn" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_MSS" "COREAXI4INTERCONNECT_C0_0:ARESETN" "FIC0_INITIATOR:ARESETN" "VSC_8662_RESETN" "pulse_generator_0:resetn" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:RESETN_VBX" "core_vectorblox_C0_0:resetn" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:S_CLK0" "Video_Pipeline_HDMI_0:DDR_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CS" "MSS:CS" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CAS_N" "Video_Pipeline_HDMI_0:CAS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CK0" "Video_Pipeline_HDMI_0:CK0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CK0_N" "Video_Pipeline_HDMI_0:CK0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CKE" "Video_Pipeline_HDMI_0:CKE" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CS_N" "Video_Pipeline_HDMI_0:CS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CAS_N" "PF_DDR4_C0_0:CAS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CK0" "PF_DDR4_C0_0:CK0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CK0_N" "PF_DDR4_C0_0:CK0_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CKE" "PF_DDR4_C0_0:CKE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_CS_N" "PF_DDR4_C0_0:CS_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_HPD_N_I" "Video_Pipeline_HDMI_0:HPD_I" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_HPD_O" "Video_Pipeline_HDMI_0:HPD_O" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_ODT" "Video_Pipeline_HDMI_0:ODT" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_RAS_N" "Video_Pipeline_HDMI_0:RAS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_RESET_N" "Video_Pipeline_HDMI_0:RESET_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_ODT" "PF_DDR4_C0_0:ODT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_RAS_N" "PF_DDR4_C0_0:RAS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_RESET_N" "PF_DDR4_C0_0:RESET_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_SCL_I" "Video_Pipeline_HDMI_0:SCL_I" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_SDA" "Video_Pipeline_HDMI_0:SDA" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_WE_N" "Video_Pipeline_HDMI_0:WE_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_WE_N" "PF_DDR4_C0_0:WE_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LANE0_RXD_N" "Video_Pipeline_HDMI_0:LANE0_RXD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LANE0_RXD_P" "Video_Pipeline_HDMI_0:LANE0_RXD_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LANE0_TXD_N" "Video_Pipeline_HDMI_0:LANE0_TXD_N" }
@@ -362,28 +383,28 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS:USB_DATA7" "USB_DATA7" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS:USB_DIR" "USB_DIR" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS:USB_NXT" "USB_NXT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS:USB_STP" "USB_STP" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD0" "Video_Pipeline_HDMI_0:SHIELD0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD1" "Video_Pipeline_HDMI_0:SHIELD1" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD2" "Video_Pipeline_HDMI_0:SHIELD2" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD3" "Video_Pipeline_HDMI_0:SHIELD3" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD4" "Video_Pipeline_HDMI_0:SHIELD4" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD5" "Video_Pipeline_HDMI_0:SHIELD5" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD6" "Video_Pipeline_HDMI_0:SHIELD6" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD7" "Video_Pipeline_HDMI_0:SHIELD7" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD0" "SHIELD0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD1" "SHIELD1" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD2" "SHIELD2" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD3" "SHIELD3" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD4" "SHIELD4" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD5" "SHIELD5" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD6" "SHIELD6" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD7" "SHIELD7" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"core_vectorblox_C0_0:output_valid" "pulse_generator_0:signal_in" }
 
 # Add bus net connections
-sd_connect_pins -sd_name ${sd_name} -pin_names {"A" "Video_Pipeline_HDMI_0:A" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BA" "Video_Pipeline_HDMI_0:BA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"A" "PF_DDR4_C0_0:A" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"BA" "PF_DDR4_C0_0:BA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CA" "MSS:CA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DM" "MSS:DM" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DQ" "MSS:DQ" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DQS" "MSS:DQS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DQS_N" "MSS:DQS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DM_N" "Video_Pipeline_HDMI_0:DM_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQ" "Video_Pipeline_HDMI_0:DQ" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQS" "Video_Pipeline_HDMI_0:DQS" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQS_N" "Video_Pipeline_HDMI_0:DQS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DM_N" "PF_DDR4_C0_0:DM_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQ" "PF_DDR4_C0_0:DQ" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQS" "PF_DDR4_C0_0:DQS" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FABRIC_DQS_N" "PF_DDR4_C0_0:DQS_N" }
 
 # Add bus interface net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mmaster0" "MSS:FIC_1_AXI4_INITIATOR" }
@@ -391,7 +412,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4m
 sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mmaster2" "axi_master_scale_updown_bilinear_top_0:master" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mmaster3" "axi_master_warpPerspective_top_0:master" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mmaster4" "draw_assist_0:m_axi" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mslave0" "Video_Pipeline_HDMI_0:be" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:AXI4mslave0" "axi_arbiter_0:be" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_INITIATOR:AXI4mmaster0" "MSS:FIC_0_AXI4_INITIATOR" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_INITIATOR:AXI4mslave2" "core_vectorblox_C0_0:S_control" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_INITIATOR:AXI4mslave3" "axi_master_scale_updown_bilinear_top_0:axi_s" }
@@ -399,6 +420,8 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_INITIATOR:AXI4mslave4" "ax
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_INITIATOR:AXI4mslave5" "draw_assist_0:s_axi" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_CONVERTER_0:APBmslave" "Video_Pipeline_HDMI_0:APB_IF" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_CONVERTER_0:FIC3_APB3_master" "MSS:FIC_3_APB_INITIATOR" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:AXI4slave0" "axi_arbiter_0:BIF_3" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Video_Pipeline_HDMI_0:BIF_1" "axi_arbiter_0:rt" }
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
