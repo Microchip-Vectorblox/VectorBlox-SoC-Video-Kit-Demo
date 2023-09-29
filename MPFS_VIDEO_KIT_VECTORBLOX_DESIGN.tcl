@@ -240,61 +240,49 @@ if { [file exists $project_dir/$project_name.prjx] } {
 # // Run the design flow and add eNVM clients 
 #
 if {[info exists SYNTHESIZE]} {
-set LIBERO_INSTALL_DIR [file dirname [file dirname [file dirname [lindex $auto_path 0]]]]
-puts "$LIBERO_INSTALL_DIR/SynplifyPro/bin/synplify_pro"
-add_profile -name synpro -type synthesis -tool "Synplify Pro ME" -location "$LIBERO_INSTALL_DIR/SynplifyPro/bin/synplify_pro" 
-select_profile -name synpro
     run_tool -name {SYNTHESIZE}
 } 
 
+configure_tool -name {PLACEROUTE} \
+    -params {EFFORT_LEVEL:true} \
+    -params {REPAIR_MIN_DELAY:true} \
+    -params {RANDOM_SEED:1}
+
+configure_tool -name {VERIFYTIMING} \
+    -params {CONSTRAINTS_COVERAGE:1} \
+    -params {FORMAT:XML} \
+    -params {MAX_EXPANDED_PATHS_TIMING:1} \
+    -params {MAX_EXPANDED_PATHS_VIOLATION:0} \
+    -params {MAX_PARALLEL_PATHS_TIMING:1} \
+    -params {MAX_PARALLEL_PATHS_VIOLATION:1} \
+    -params {MAX_PATHS_INTERACTIVE_REPORT:1000} \
+    -params {MAX_PATHS_TIMING:5} \
+    -params {MAX_PATHS_VIOLATION:20} \
+    -params {MAX_TIMING_FAST_HV_LT:1} \
+    -params {MAX_TIMING_MULTI_CORNER:1} \
+    -params {MAX_TIMING_SLOW_LV_HT:1} \
+    -params {MAX_TIMING_SLOW_LV_LT:1} \
+    -params {MAX_TIMING_VIOLATIONS_FAST_HV_LT:1} \
+    -params {MAX_TIMING_VIOLATIONS_MULTI_CORNER:1} \
+    -params {MAX_TIMING_VIOLATIONS_SLOW_LV_HT:1} \
+    -params {MAX_TIMING_VIOLATIONS_SLOW_LV_LT:1} \
+    -params {MIN_TIMING_FAST_HV_LT:1} \
+    -params {MIN_TIMING_MULTI_CORNER:1} \
+    -params {MIN_TIMING_SLOW_LV_HT:1} \
+    -params {MIN_TIMING_SLOW_LV_LT:1} \
+    -params {MIN_TIMING_VIOLATIONS_FAST_HV_LT:1} \
+    -params {MIN_TIMING_VIOLATIONS_MULTI_CORNER:1} \
+    -params {MIN_TIMING_VIOLATIONS_SLOW_LV_HT:1} \
+    -params {MIN_TIMING_VIOLATIONS_SLOW_LV_LT:1} \
+    -params {SLACK_THRESHOLD_VIOLATION:0.0} \
+    -params {SMART_INTERACTIVE:1} 
+
+
 if {[info exists PLACEROUTE]} {
-    configure_tool -name {PLACEROUTE} \
-	-params {EFFORT_LEVEL:true} \
-	-params {INCRPLACEANDROUTE:false} \
-	-params {REPAIR_MIN_DELAY:true} \
-	-params {RANDOM_SEED:0}
-
-    run_tool -name {PLACEROUTE}
-
-    configure_tool -name {PLACEROUTE} \
-	-params {EFFORT_LEVEL:false} \
-	-params {INCRPLACEANDROUTE:true} \
-	-params {REPAIR_MIN_DELAY:true} \
-	-params {RANDOM_SEED:0}
-
     run_tool -name {PLACEROUTE}
 } 
 
 if {[info exists VERIFY_TIMING]} {
-    configure_tool -name {VERIFYTIMING} \
-	-params {CONSTRAINTS_COVERAGE:1} \
-	-params {FORMAT:XML} \
-	-params {MAX_EXPANDED_PATHS_TIMING:1} \
-	-params {MAX_EXPANDED_PATHS_VIOLATION:0} \
-	-params {MAX_PARALLEL_PATHS_TIMING:1} \
-	-params {MAX_PARALLEL_PATHS_VIOLATION:1} \
-	-params {MAX_PATHS_INTERACTIVE_REPORT:1000} \
-	-params {MAX_PATHS_TIMING:5} \
-	-params {MAX_PATHS_VIOLATION:20} \
-	-params {MAX_TIMING_FAST_HV_LT:1} \
-	-params {MAX_TIMING_MULTI_CORNER:1} \
-	-params {MAX_TIMING_SLOW_LV_HT:1} \
-	-params {MAX_TIMING_SLOW_LV_LT:1} \
-	-params {MAX_TIMING_VIOLATIONS_FAST_HV_LT:1} \
-	-params {MAX_TIMING_VIOLATIONS_MULTI_CORNER:1} \
-	-params {MAX_TIMING_VIOLATIONS_SLOW_LV_HT:1} \
-	-params {MAX_TIMING_VIOLATIONS_SLOW_LV_LT:1} \
-	-params {MIN_TIMING_FAST_HV_LT:1} \
-	-params {MIN_TIMING_MULTI_CORNER:1} \
-	-params {MIN_TIMING_SLOW_LV_HT:1} \
-	-params {MIN_TIMING_SLOW_LV_LT:1} \
-	-params {MIN_TIMING_VIOLATIONS_FAST_HV_LT:1} \
-	-params {MIN_TIMING_VIOLATIONS_MULTI_CORNER:1} \
-	-params {MIN_TIMING_VIOLATIONS_SLOW_LV_HT:1} \
-	-params {MIN_TIMING_VIOLATIONS_SLOW_LV_LT:1} \
-	-params {SLACK_THRESHOLD_VIOLATION:0.0} \
-	-params {SMART_INTERACTIVE:1} 
-
     run_tool -name {VERIFYTIMING}
 }
 
