@@ -9,6 +9,7 @@
   - [Description](#description)
   - [Using the Vectorblox design generation Tcl script](#using-the-reference-design-generation-tcl-script)
     - [Licensing](#licensing)
+    - [1.4.4.2 Hotfix](#1.4.4.2-Hotfix)
     - [Standard design generation](#standard-design-generation)
     - [Arguments supported](#arguments-supported)
   - [Programming the FPGA](#programming-the-fpga)
@@ -43,6 +44,35 @@ To generate the Vectorblox demo design, the following flow can be used:
 4. Execute the "MPFS_VIDEO_KIT_REFERENCE_DESIGN.tcl" script
 5. Configure the design if required
 6. Run the Libero SoC design flow to program a device
+
+
+<a name = "Vectorblox v1.4.4.2-Fix"></a>
+### Vectorblox v1.4.4.2-Fix
+
+Step 1: Open the following file in the `script_support` directory:
+- `./component/work/PF_DDR4_C0.v`
+
+Step 2: Go to line 1098 and modify it as follows
+
+from:
+```
+assign ADDR_VCOPHS_OFFSET_const_net_0               = 3'h4;
+```
+to:
+```
+assign ADDR_VCOPHS_OFFSET_const_net_0               = 3'h5;
+```
+
+Step 3: Open the PF_DDR4_C0.v file from the project in the Libero tool and confirm it gets modified as shown below (line 1098).
+
+![](media/libero_config.png)
+
+Step 4: Run Generate Bitstream
+
+Step 5: Run `Export FlashPro Express Job` in Libero to create a job file that can be flashed onto the board or select `Run Program Action` to program the board.
+
+
+*note* If regeneration of the DDR4 IP or modification of the configuration will cause these changes to be lost.
 
 <a name="arguments-supported"></a>
 ### Arguments supported
