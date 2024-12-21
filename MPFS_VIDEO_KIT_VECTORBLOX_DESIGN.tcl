@@ -1,22 +1,35 @@
+##################################################################################
+##################################################################################
 #
 # // PFSoC Video Kit VBX HDMI demo Libero design
 #
-# // Check Libero version and path lenth to verify project can be created
-#
+##################################################################################
+##################################################################################
 
-if {[string compare [string range [get_libero_version] 0 end-4] "2023.1"]==0} {
-	puts "Libero v2023.1 detected."
+##################################################################################
+##################################################################################
+# // Check Libero version and path length to verify project can be created
+##################################################################################
+##################################################################################
+set libero_version 2024.2
+set my_platform "Linux"
+
+if {[string compare [string range [get_libero_version] 0 5] "$libero_version"]==0} {
+    puts "Libero $libero_version detected."
 } else {
-	error "Incorrect Libero version. Please use Libero v2023.1 to run these scripts."
+    error "Incorrect Libero version. Please use Libero $libero_version to run these scripts."
 }
+
 
 if { [lindex $tcl_platform(os) 0]  == "Windows" } {
-	if {[string length [pwd]] < 90} {
-		puts "Project path length ok."
-	} else {
-		error "Path to project is too long, please reduce the path and try again."
-	}
+        if {[string length [pwd]] < 90} {
+                puts "Project path length ok."
+        } else {
+                error "Path to project is too long, please reduce the path and try again."
+        }
+   set my_platform "Windows"
 }
+
 
 #
 # // Process arguments
@@ -48,7 +61,7 @@ set mss_config_loc "$install_loc/bin64/pfsoc_mss"
 set local_dir [pwd]
 set src_path ./script_support
 set constraint_path ./script_support/constraint
-set release_tag "2023.1"
+set release_tag "2024.2"
 
 set project_name "VKPFSOC_VECTORBLOX"
 set project_dir "$local_dir/$project_name"
@@ -95,24 +108,29 @@ if { [file exists $project_dir/$project_name.prjx] } {
     # // Download required cores
     #
 
+    download_core -vlnv {Microsemi:SolutionCore:Bayer_Interpolation:4.7.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:DirectCore:CoreAPB3:4.2.100} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:DirectCore:CORERESET_PF:2.3.100} -location {www.microchip-ip.com/repositories/DirectCore}
-    download_core -vlnv {Actel:DirectCore:CORERXIODBITALIGN:2.2.100} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Actel:DirectCore:CORERXIODBITALIGN:2.3.103} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microsemi:SolutionCore:Gamma_Correction:4.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microsemi:SolutionCore:IMAGE_SCALER:4.1.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:1.0.307} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Microchip:SolutionCore:mipicsi2rxdecoderPF:4.7.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:SgCore:PF_CCC:2.2.220} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_CLK_DIV:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.109} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.113} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_OSC:1.0.102} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_XCVR_REF_CLK:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Microsemi:SolutionCore:DDR_AXI4_ARBITER_PF:2.1.0} -location {www.microchip-ip.com/repositories/DirectCore}
-    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:1.1.15} -location {www.microchip-ip.com/repositories/DirectCore} 
-    download_core -vlnv {Microsemi:SolutionCore:Display_Controller:4.5.0} -location {www.microchip-ip.com/repositories/DirectCore} 
-    download_core -vlnv {Microchip:SolutionCore:HDMI_RX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore} 
-    download_core -vlnv {Microchip:SolutionCore:HDMI_TX:5.1.0} -location {www.microchip-ip.com/repositories/DirectCore} 
-    download_core -vlnv {Actel:SgCore:PF_TX_PLL:2.0.302} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.200} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_DDR4:2.5.111} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:2.0.1} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microsemi:SolutionCore:Display_Controller:4.5.0} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:HDMI_RX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:HDMI_TX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:DDR_Read:1.2.0} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Actel:SgCore:PF_TX_PLL:2.0.304} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.205} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:DDR_AXI4_ARBITER_PF:2.2.0} -location {www.microchip-ip.com/repositories/DirectCore}
 
 
     #
@@ -129,50 +147,77 @@ if { [file exists $project_dir/$project_name.prjx] } {
     build_design_hierarchy
 
     #Sourcing the Tcl files in which HDL+ core definitions are created for HDL modules
-    source ${src_path}/components/video_fifo.tcl 
+    source ${src_path}/components/WB_Native.tcl
+    source ${src_path}/components/DDR_Frame_Blanker.tcl
+    source ${src_path}/components/alpha_blender.tcl
+    source ${src_path}/components/ddr_dma_write_bif.tcl
+    source ${src_path}/components/ddr_dma_write_axi4.tcl
+    source ${src_path}/components/vbx_cm_cdc.tcl
+    source ${src_path}/components/video_cdc_fifo.tcl
+    source ${src_path}/components/video_switch.tcl
     source ${src_path}/components/apb3_if.tcl
-    source ${src_path}/components/ddr_rw_arbiter.tcl
-    source ${src_path}/components/axi_master_scale_updown_bilinear_top.tcl 
-    source ${src_path}/components/axi_master_warpPerspective_top.tcl 
-    source ${src_path}/components/draw_assist.tcl 
-    source ${src_path}/components/axi_arbiter.tcl 
+    source ${src_path}/components/axi_master_scale_updown_bilinear_top.tcl
+    source ${src_path}/components/axi_master_warpPerspective_top.tcl
+    source ${src_path}/components/draw_assist.tcl
+    source ${src_path}/components/axi_arbiter.tcl
     build_design_hierarchy
 
     #Sourcing the Tcl files for creating individual ${src_path}/components under the top level
-    source ${src_path}/components/CORERESET_PF_C0.tcl 
-
-    #HDMI
-    source ${src_path}/components/DDR_Read_HDMI_RX.tcl 
-    source ${src_path}/components/DDR_Write_HDMI_RX.tcl 
-    source ${src_path}/components/Display_Controller_C0.tcl 
-    source ${src_path}/components/HDMI_RX_C0.tcl 
-    source ${src_path}/components/HDMI_TX_C0.tcl 
-    source ${src_path}/components/PF_TX_PLL_C0.tcl 
-    source ${src_path}/components/PF_XCVR_ERM_C2.tcl 
-    source ${src_path}/components/read_top.tcl 
-    source ${src_path}/components/write_top.tcl 
-    source ${src_path}/components/Video_arbiter_top.tcl 
-    source ${src_path}/components/PF_DDR4_C0.tcl 
-    source ${src_path}/components/PF_CCC_C1.tcl
-    source ${src_path}/components/Video_Pipeline_HDMI.tcl 
+    #source ${src_path}/components/CORERESET_PF_C0.tcl
 
     # CLOCKS
-    source ${src_path}/components/PFSOC_INIT_MONITOR_C0.tcl 
+    source ${src_path}/components/PFSOC_INIT_MONITOR_C0.tcl
     source ${src_path}/components/PF_CCC_C0.tcl
     source ${src_path}/components/PF_CCC_VBX.tcl
+    source ${src_path}/components/PF_CCC_170MCLK.tcl
     source ${src_path}/components/PF_CLK_DIV_C0.tcl
     source ${src_path}/components/PF_OSC_C0.tcl
     source ${src_path}/components/PF_XCVR_REF_CLK_C0.tcl
+    source ${src_path}/components/CORERESET_PF_C0.tcl
     source ${src_path}/components/CLOCKS_AND_RESETS.tcl
 
+    build_design_hierarchy
+
+
+    source ${src_path}/components/PF_CCC_C2.tcl
+    source ${src_path}/components/Gamma_Correction_C0.tcl
+    source ${src_path}/components/Bayer_Interpolation_C0.tcl
+    source ${src_path}/components/CORERXIODBITALIGN_C1.tcl
+    source ${src_path}/components/CORERESET_PF_C1.tcl
+    source ${src_path}/components/CORERESET_PF_C2.tcl
+    source ${src_path}/components/DDR_AXI4_ARBITER_PF_C0.tcl
+
+    source ${src_path}/components/IMAGE_SCALER_C0.tcl
+    source ${src_path}/components/PF_IOD_GENERIC_RX_C0.tcl
+    source ${src_path}/components/CAM_IOD_TIP_TOP.tcl
+    source ${src_path}/components/mipicsi2rxdecoderPF_C0.tcl
+
+    build_design_hierarchy
+    source ${src_path}/components/IMX334_IF_TOP.tcl
+    source ${src_path}/components/CAMERA_ISP.tcl
+
+    build_design_hierarchy
+
+    #HDMI
+    source ${src_path}/components/DDR_Read_C0.tcl
+    source ${src_path}/components/Display_Controller_C0.tcl
+    source ${src_path}/components/HDMI_RX_C0.tcl
+    source ${src_path}/components/HDMI_TX_C0.tcl
+    source ${src_path}/components/PF_TX_PLL_C0.tcl
+    source ${src_path}/components/PF_XCVR_ERM_C2.tcl
+#    source ${src_path}/components/Video_arbiter_top.tcl
+    source ${src_path}/components/PF_DDR4_C0.tcl
+    source ${src_path}/components/Video_Pipeline_HDMI.tcl
+
+    build_design_hierarchy
 
     #top level
-    source ${src_path}/components/COREAXI4INTERCONNECT_C0.tcl 
+    source ${src_path}/components/COREAXI4INTERCONNECT_C0.tcl
     source ${src_path}/components/CoreAPB3_C0.tcl
-    source ${src_path}/components/H264/FIC_CONVERTER.tcl
+    source ${src_path}/components/FIC_CONVERTER.tcl
     source ${src_path}/components/FIC0_INITIATOR.tcl
     source ${src_path}/components/core_vectorblox_C0.tcl
-    source ${src_path}/components/VKPFSOC_Vectorblox.tcl
+    source ${src_path}/components/VKPFSOC_TOP.tcl
     build_design_hierarchy
     set_root -module {VKPFSOC_TOP::work}
     #
@@ -204,15 +249,15 @@ if { [file exists $project_dir/$project_name.prjx] } {
     import_files \
 	    -convert_EDN_to_HDL 0 \
 	    -sdc "${constraint_path}/user.sdc"
-    set_as_target -type {sdc} -file "${constraint_path}/user.sdc"    
+    set_as_target -type {sdc} -file "${constraint_path}/user.sdc"
     #
     # // Associate imported constraints with the design flow
     #
     organize_tool_files -tool {SYNTHESIZE} \
       -file "${project_dir}/constraint/VKPFSOC_TOP_derived_constraints.sdc" \
       -module {VKPFSOC_TOP::work} \
-      -input_type {constraint} 
-      
+      -input_type {constraint}
+
     organize_tool_files -tool {PLACEROUTE} \
 	-file "${project_dir}/constraint/io/VIDEO_KIT_MAC.pdc" \
 	-file "${project_dir}/constraint/io/VIDEO_KIT_MMUART0.pdc" \
@@ -232,21 +277,35 @@ if { [file exists $project_dir/$project_name.prjx] } {
 	-module {VKPFSOC_TOP::work} \
 	-input_type {constraint}
 
-    save_project 
+    save_project
 
 }; # // Create project
 
 #
-# // Run the design flow and add eNVM clients 
+# // Run the design flow and add eNVM clients
 #
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
-} 
+}
 
 configure_tool -name {PLACEROUTE} \
+    -params {DELAY_ANALYSIS:MAX} \
     -params {EFFORT_LEVEL:true} \
+    -params {GB_DEMOTION:true} \
+    -params {INCRPLACEANDROUTE:false} \
+    -params {IOREG_COMBINING:false} \
+    -params {MULTI_PASS_CRITERIA:VIOLATIONS} \
+    -params {MULTI_PASS_LAYOUT:true} \
+    -params {NUM_MULTI_PASSES:6} \
+    -params {PDPR:false} \
+    -params {RANDOM_SEED:1} \
     -params {REPAIR_MIN_DELAY:true} \
-    -params {RANDOM_SEED:1}
+    -params {REPLICATION:true} \
+    -params {SLACK_CRITERIA:WORST_SLACK} \
+    -params {SPECIFIC_CLOCK:} \
+    -params {START_SEED_INDEX:1} \
+    -params {STOP_ON_FIRST_PASS:true} \
+    -params {TDPR:true}
 
 configure_tool -name {VERIFYTIMING} \
     -params {CONSTRAINTS_COVERAGE:1} \
@@ -275,12 +334,12 @@ configure_tool -name {VERIFYTIMING} \
     -params {MIN_TIMING_VIOLATIONS_SLOW_LV_HT:1} \
     -params {MIN_TIMING_VIOLATIONS_SLOW_LV_LT:1} \
     -params {SLACK_THRESHOLD_VIOLATION:0.0} \
-    -params {SMART_INTERACTIVE:1} 
+    -params {SMART_INTERACTIVE:1}
 
 
 if {[info exists PLACEROUTE]} {
     run_tool -name {PLACEROUTE}
-} 
+}
 
 if {[info exists VERIFY_TIMING]} {
     run_tool -name {VERIFYTIMING}
@@ -289,18 +348,18 @@ if {[info exists VERIFY_TIMING]} {
 if {[info exists HSS_UPDATE]} {
   if !{[file exists "./script_support/hss-envm-wrapper.mpfs-video-kit.hex"]} {
       if {[catch    {exec wget --no-check-certificate https://github.com/polarfire-soc/hart-software-services/releases/download/v2023.02.1/hss-envm-wrapper.mpfs-video-kit.hex -P ./script_support/} issue]} {
-	  
+
       }
      }
-  
+
   create_eNVM_config "$local_dir/script_support/MSS_VIDEO_KIT/ENVM.cfg" "../script_support/hss-envm-wrapper.mpfs-video-kit.hex"
   run_tool -name {GENERATEPROGRAMMINGDATA}
   configure_envm -cfg_file {script_support/MSS_VIDEO_KIT/ENVM.cfg}
 } elseif {[info exists GENERATE_PROGRAMMING_DATA]} {
-    run_tool -name {GENERATEPROGRAMMINGDATA} 
-} 
+    run_tool -name {GENERATEPROGRAMMINGDATA}
+}
 
-if {[info exists EXPORT_FPE]} {   
+if {[info exists EXPORT_FPE]} {
     if {[info exists HSS_UPDATE]} {
         if {$EXPORT_FPE == 1} {
             export_fpe_job $project_name $local_dir "ENVM FABRIC SNVM"

@@ -1,10 +1,11 @@
 # Exporting Component Description of PF_IOD_GENERIC_RX_C0 to TCL
 # Family: PolarFireSoC
-# Part Number: MPFS250T_ES-1FCG1152E
+# Part Number: MPFS250TS-1FCG1152I
 # Create and Configure the core component PF_IOD_GENERIC_RX_C0
-create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.109} -component_name {PF_IOD_GENERIC_RX_C0} -params {\
+create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.113} -component_name {PF_IOD_GENERIC_RX_C0} -params {\
+"BCLKSCLK_TRN_DIR:BACKWARD" \
 "CLOCK_DELAY_VALUE:0" \
-"DATA_RATE:1200" \
+"DATA_RATE:500" \
 "DATA_RATIO:8" \
 "DATA_WIDTH:7" \
 "DDR_MODE:DDR" \

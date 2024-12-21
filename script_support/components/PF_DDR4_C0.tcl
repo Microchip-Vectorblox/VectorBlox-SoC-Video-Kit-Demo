@@ -1,8 +1,8 @@
 # Exporting Component Description of PF_DDR4_C0 to TCL
 # Family: PolarFireSoC
-# Part Number: MPFS250T_ES-1FCG1152E
+# Part Number: MPFS250TS-1FCG1152I
 # Create and Configure the core component PF_DDR4_C0
-create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.111} -component_name {PF_DDR4_C0} -params {\
+create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -component_name {PF_DDR4_C0} -params {\
 "ADDRESS_MIRROR:false" \
 "ADDRESS_ORDERING:CHIP_ROW_BG_BANK_COL" \
 "AUTO_SELF_REFRESH:3" \
@@ -17,6 +17,7 @@ create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.111} -comp
 "CAS_WRITE_LATENCY:11" \
 "CA_PARITY_LATENCY_MODE:0" \
 "CCC_PLL_CLOCK_MULTIPLIER:16" \
+"CK_CA_ADDITIVE_OFFSET:5" \
 "CLOCK_DDR:800.0" \
 "CLOCK_PLL_REFERENCE:50.000" \
 "CLOCK_RATE:4" \
@@ -116,7 +117,7 @@ create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.111} -comp
 "WRITE_PREAMBLE:0" \
 "ZQ_CALIB_PERIOD:200" \
 "ZQ_CALIB_TYPE:0" \
-"ZQ_CALIB_TYPE_TEMP:0" \
+"ZQ_CALIB_TYPE_TEMP:false" \
 "ZQ_CAL_INIT_TIME:1024" \
 "ZQ_CAL_L_TIME:512" \
 "ZQ_CAL_S_TIME:128" }

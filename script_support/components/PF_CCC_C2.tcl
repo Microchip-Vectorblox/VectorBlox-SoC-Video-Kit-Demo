@@ -1,6 +1,6 @@
 # Exporting Component Description of PF_CCC_C2 to TCL
 # Family: PolarFireSoC
-# Part Number: MPFS250T_ES-1FCG1152E
+# Part Number: MPFS250TS-1FCG1152I
 # Create and Configure the core component PF_CCC_C2
 create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_name {PF_CCC_C2} -params {\
 "DLL_CLK_0_BANKCLK_EN:false"  \
@@ -39,7 +39,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL0_0_BYPASS:0"  \
 "GL0_0_BYPASS_EN:false"  \
 "GL0_0_DEDICATED_USED:false"  \
-"GL0_0_DIV:10"  \
+"GL0_0_DIV:7"  \
 "GL0_0_DIVSTART:0"  \
 "GL0_0_DYNAMIC_PH:false"  \
 "GL0_0_EXPOSE_EN:false"  \
@@ -47,7 +47,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL0_0_FABCLK_USED:true"  \
 "GL0_0_FREQ_SEL:false"  \
 "GL0_0_IS_USED:true"  \
-"GL0_0_OUT_FREQ:120"  \
+"GL0_0_OUT_FREQ:170"  \
 "GL0_0_PHASE_INDEX:0"  \
 "GL0_0_PHASE_SEL:false"  \
 "GL0_0_PLL_PHASE:0"  \
@@ -214,7 +214,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "PLL_FB_CLK_1:GL0_1"  \
 "PLL_FEEDBACK_MODE_0:Post-VCO"  \
 "PLL_FEEDBACK_MODE_1:Post-VCO"  \
-"PLL_IN_FREQ_0:150"  \
+"PLL_IN_FREQ_0:62.5"  \
 "PLL_IN_FREQ_1:100"  \
 "PLL_INT_MODE_EN_0:false"  \
 "PLL_INT_MODE_EN_1:false"  \
@@ -227,8 +227,9 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "PLL_POSTDIVIDERADDSOFTLOGIC_0:true"  \
 "PLL_REF_CLK_SEL_0:false"  \
 "PLL_REF_CLK_SEL_1:false"  \
-"PLL_REFDIV_0:1"  \
+"PLL_REFDIV_0:5"  \
 "PLL_REFDIV_1:1"  \
+"PLL_RESET_ON_LOCK_0:true"  \
 "PLL_SPREAD_MODE_0:false"  \
 "PLL_SPREAD_MODE_1:false"  \
 "PLL_SSM_DEPTH_0:5"  \

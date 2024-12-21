@@ -2,7 +2,7 @@
 # Exporting Create HDL core command for module axi_arbiter
 create_hdl_core -file {hdl/axi_arbiter.vhd} -module {axi_arbiter} -library {work} -package {}
 # Exporting BIF information of  HDL core command for module axi_arbiter
-hdl_core_add_bif -hdl_core_name {axi_arbiter} -bif_definition {AXI4:AMBA:AMBA4:mirroredMaster} -bif_name {rt} -signal_map {\
+hdl_core_add_bif -hdl_core_name {axi_arbiter} -bif_definition {AXI4:AMBA:AMBA4:slave} -bif_name {rt} -signal_map {\
 "AWID:s_realtime_awid" \
 "AWADDR:s_realtime_awaddr" \
 "AWLEN:s_realtime_awlen" \

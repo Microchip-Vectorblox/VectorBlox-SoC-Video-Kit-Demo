@@ -1,4 +1,4 @@
-# Creating SmartDesign FIC_CONVERTER
+# Creating SmartDesign "FIC_CONVERTER"
 set sd_name {FIC_CONVERTER}
 create_smartdesign -sd_name ${sd_name}
 
@@ -64,7 +64,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CoreAPB3_C0_0:APB3mmaster" "FIC
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
-# Save the smartDesign
+# Save the SmartDesign 
 save_smartdesign -sd_name ${sd_name}
-# Generate SmartDesign FIC_CONVERTER
+# Generate SmartDesign "FIC_CONVERTER"
 generate_component -component_name ${sd_name}

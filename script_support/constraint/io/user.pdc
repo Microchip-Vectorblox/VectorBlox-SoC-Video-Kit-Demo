@@ -170,70 +170,70 @@ set_io -port_name CAM1_RST  \
     -DIRECTION OUTPUT
 
 
-#set_io -port_name {CAM1_RXD[0]}  \
+set_io -port_name {CAM1_RXD[0]}  \
     -pin_name L12                \
     -fixed true                  \
     -io_std MIPI25               \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD[1]}  \
+set_io -port_name {CAM1_RXD[1]}  \
     -pin_name L10                \
     -fixed true                  \
     -io_std MIPI25               \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD[2]}  \
+set_io -port_name {CAM1_RXD[2]}  \
     -pin_name M11                \
     -fixed true                  \
     -io_std MIPI25               \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD[3]}  \
+set_io -port_name {CAM1_RXD[3]}  \
     -pin_name N13                \
     -fixed true                  \
     -io_std MIPI25               \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD_N[0]}  \
+set_io -port_name {CAM1_RXD_N[0]}  \
     -pin_name M12                  \
     -fixed true                    \
     -io_std MIPI25                 \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD_N[1]}  \
+set_io -port_name {CAM1_RXD_N[1]}  \
     -pin_name K10                  \
     -fixed true                    \
     -io_std MIPI25                 \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD_N[2]}  \
+set_io -port_name {CAM1_RXD_N[2]}  \
     -pin_name N11                  \
     -fixed true                    \
     -io_std MIPI25                 \
     -DIRECTION INPUT
 
 
-#set_io -port_name {CAM1_RXD_N[3]}  \
+set_io -port_name {CAM1_RXD_N[3]}  \
     -pin_name N12                  \
     -fixed true                    \
     -io_std MIPI25                 \
     -DIRECTION INPUT
 
 
-#set_io -port_name CAM1_RX_CLK_N  \
+set_io -port_name CAM1_RX_CLK_N  \
     -pin_name N14                \
     -fixed true                  \
     -io_std MIPI25               \
     -DIRECTION INPUT
 
 
-#set_io -port_name CAM1_RX_CLK_P  \
+set_io -port_name CAM1_RX_CLK_P  \
     -pin_name M14                \
     -fixed true                  \
     -io_std MIPI25               \
