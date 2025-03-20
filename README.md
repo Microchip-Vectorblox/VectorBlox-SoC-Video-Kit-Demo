@@ -17,6 +17,11 @@
   - [Building the demo](#building-the-demo)
   - [Controlling the demo](#Controlling-the-VectorBlox-demo)
 
+<a name="Quickstart"></a>
+## QuickStart
+
+To start running the demo on the PolarFire SoC Video Kit (without building), please use the quickstart guide [here](docs/Quickstart.md)
+
 <a name="description"></a>
 ## Description
 
@@ -27,7 +32,7 @@ This repository supports Libero SoC v2024.2, which is available for download [he
 <a name="licensing"></a>
 ### Licensing
 
-The Video Kit VectorBlox Design requires two free licences -- `Libero SoC Silver License` and `Libero Soc VectorBlox License`. Licensing information is available on the Microchip website [here](https://www.microchip.com/en-us/products/fpgas-and-plds/fpga-and-soc-design-tools/fpga/licensing).
+If building the Video Kit VectorBlox Design in Libero, two free licences -- `Libero SoC Silver License` and `Libero Soc VectorBlox License` are required. Licensing information is available on the Microchip website [here](https://www.microchip.com/en-us/products/fpgas-and-plds/fpga-and-soc-design-tools/fpga/licensing).
 
 <a name="using-the-vectorblox-design-generation-tcl-script"></a>
 ## Using the VectorBlox design generation Tcl script
@@ -139,17 +144,17 @@ If both QSPI and MMC services are enabled in the HSS, you must specify the defau
 
 ## Building the demo
 - Login as `root` (on MMUART1 or via ssh over ethernet, IP address for the board can be obtained via either typing `ifconfig` or `ip a | grep dynamic` in the Command Line Interface)
-- Download and unzip the [sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.zip) to the root directory:
+- Download and unzip the [sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.1.zip) to the root directory:
 	```
-	wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.zip 
+	wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.1.zip 
 
-	unzip samples_V1000_2.0.zip 
+	unzip samples_V1000_2.0.1.zip 
 	```
-- Download and unzip the [VectorBlox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.zip) to the root directory
+- Download and unzip the [VectorBlox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.1.zip) to the root directory
     ```
-    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.zip
+    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.1.zip
 
-    unzip release-v2.0.zip
+    unzip release-v2.0.1.zip
     ```
 
 - HDMI cables connected to the PolarFire SoC Video Kit (Rx/Tx)
@@ -181,7 +186,7 @@ Info: v4l2-start_service.sh is a start up service that is automatically run at t
 
 
 ## Starting the VectorBlox demo on the PolarFire SoC Video Kit
-- Run the following commands in `VectorBlox-SDK-release-v2.0/example/soc-video-c` directory:
+- Run the following commands in `VectorBlox-SDK-release-v2.0.1/example/soc-video-c` directory:
     - `make overlay` to add the VectorBlox instance to the device tree (This step is not required if the camera setup command is run and working properly) 
     - `make` to build the demo application
     - `./run-video-model` to launch the demo
