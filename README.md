@@ -144,17 +144,17 @@ If both QSPI and MMC services are enabled in the HSS, you must specify the defau
 
 ## Building the demo
 - Login as `root` (on MMUART1 or via ssh over ethernet, IP address for the board can be obtained via either typing `ifconfig` or `ip a | grep dynamic` in the Command Line Interface)
-- Download and unzip the [sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.1.zip) to the root directory:
+- Download and unzip the [sample networks](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.2.zip) to the root directory:
 	```
-	wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.1.zip 
+	wget --no-check-certificate https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/ModelZoo/samples_V1000_2.0.2.zip 
 
-	unzip samples_V1000_2.0.1.zip 
+	unzip samples_V1000_2.0.2.zip 
 	```
-- Download and unzip the [VectorBlox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.1.zip) to the root directory
+- Download and unzip the [VectorBlox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.2.zip) to the root directory
     ```
-    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.1.zip
+    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.2.zip
 
-    unzip release-v2.0.1.zip
+    unzip release-v2.0.2.zip
     ```
 
 - HDMI cables connected to the PolarFire SoC Video Kit (Rx/Tx)
@@ -186,7 +186,7 @@ Info: v4l2-start_service.sh is a start up service that is automatically run at t
 
 
 ## Starting the VectorBlox demo on the PolarFire SoC Video Kit
-- Run the following commands in `VectorBlox-SDK-release-v2.0.1/example/soc-video-c` directory:
+- Run the following commands in `VectorBlox-SDK-release-v2.0.2/example/soc-video-c` directory:
     - `make overlay` to add the VectorBlox instance to the device tree (This step is not required if the camera setup command is run and working properly) 
     - `make` to build the demo application
     - `./run-video-model` to launch the demo
@@ -197,13 +197,18 @@ Info: v4l2-start_service.sh is a start up service that is automatically run at t
 - The demo consists of the following:
     - Face Recognition Demo
     - Classification (Mobilenetv2)
-    - Object Detection (yolov8n) 
+    - Object Detection (Yolov8n) 
+    - Pose Estimation (Yolov8n Pose)
+    - Semantic Segmentation (FFNet-122NS)
+    - Depth Estimation (Midas V2)
     
 - Use the `ENTER` key to switch modes. Entering `q` (pressing `q` and `ENTER`) quits the demo
 - In the `Face Recognition` mode, you can enter `a` to add or `d` to delete face embeddings
     - Entering `a` initially highlights the largest face on-screen, entering `a` again adds that face to the embeddings. You will then be prompted to enter a name( or just press `ENTER` to use the default ID)
 
     - Entering `d` will list the indices and names of the embeddings. Enter the desired index to delete the specified embedding from the database (or press `ENTER` to skip the deletion)
+
+- Entering `b` on any models that use Pose Estimation for postprocessing will allow the user to toggle between blackout options for the img output.
 
 
 Samples videos for input to the Faces Recognition mode is available [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SampleFaces.mp4).
