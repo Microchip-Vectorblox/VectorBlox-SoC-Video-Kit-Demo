@@ -144,30 +144,22 @@ If both QSPI and MMC services are enabled in the HSS, you must specify the defau
 
 ## Building the demo
 - Login as `root` (on MMUART1 or via ssh over ethernet, IP address for the board can be obtained via either typing `ifconfig` or `ip a | grep dynamic` in the Command Line Interface)
-- Download and unzip the [sample networks](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v2.0.2/samples_V1000_2.0.2.zip) to the root directory:
+- Download and run the [quick_start.sh](https://raw.githubusercontent.com/Microchip-Vectorblox/assets/refs/heads/main/quick_start.sh) script to the root directory:
     ```
-    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v2.0.2/samples_V1000_2.0.2.zip
+    wget --no-check-certificate https://raw.githubusercontent.com/Microchip-Vectorblox/assets/refs/heads/main/quick_start.sh 
 
-    unzip samples_V1000_2.0.2.zip 
-    ```
-- Download and unzip the [VectorBlox SDK](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.2.zip) to the root directory
-    ```
-    wget --no-check-certificate https://github.com/Microchip-Vectorblox/VectorBlox-SDK/archive/refs/tags/release-v2.0.2.zip
-
-    unzip release-v2.0.2.zip
+    bash quick_start.sh
     ```
 
 - HDMI cables connected to the PolarFire SoC Video Kit (Rx/Tx)
     > Please check cables and power-cycle board if any issues such as noise/white screen appear on output.
 
 ## Setting up MIPI camera
-One time Initial camera setup:
-
-- Navigate to the `VectorBlox-SDK-release-v2.0.2/example/soc-video-c` directory
+- Manual camera setup:
 
     1. Plug in camera daughter card to PolarFire SOC video kit board if it's not already connected.
-    2. Run the `setup_camera.sh` script via `bash setup_camera.sh` (This script will only need to be run once)
-    3. After running the script, wait 30 seconds, and then power cycle the board to enable the automatic brightness adjustment
+	2. Run the `setup_camera.sh` script via `bash setup_camera.sh` (This script will only need to be run once, script can be found in the `VectorBlox_SDK/example/soc-video-c` directory, this script should only be run after running the `quick_start.sh` script if the camera fails to function properly)
+    3. After running the script, power cycle the board to enable the automatic brightness adjustment
     
 - If the camera feed does not automatically adjust the brightness, ensure the `make overlay` step from below is run and then run the `auto_gain` executable found in the `/opt/microchip/` directory with the following:
     ```
@@ -206,7 +198,7 @@ Info: v4l2-start_service.sh is a start up service that is automatically run at t
 - Entering `b` on any models that use Pose Estimation for postprocessing will allow the user to toggle between blackout options for the img output.
 
 
-Samples videos for input to the Faces Recognition mode is available [here](https://github.com/Microchip-Vectorblox/assets/releases/download/assets/SampleFaces.mp4).
+Samples videos for input to the Faces Recognition mode is available [here](https://vector-blox-model-zoo.s3.us-west-2.amazonaws.com/Releases/SampleFaces.mp4).
 
 
 Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
