@@ -11,7 +11,7 @@
 # // Check Libero version and path length to verify project can be created
 ##################################################################################
 ##################################################################################
-set libero_version 2024.2
+set libero_version 2025.1
 set my_platform "Linux"
 
 if {[string compare [string range [get_libero_version] 0 5] "$libero_version"]==0} {
@@ -55,16 +55,35 @@ if { $::argc > 0 } {
 #
 # // Set required variables and add functions
 #
+if {[info exists COMP]} {
+    set compression_type "comp"
+} elseif {[info exists UCOMP]} {
+    set compression_type "ucomp"
+} else {
+    set compression_type "no_comp"
+}
+
+if {[info exists MIPI]} {
+    set input_type "mipi_input"
+} elseif {[info exists HDMI]} {
+    set input_type "hdmi_input"
+} else {
+    set input_type "both_input"
+    if {[string equal "$compression_type" "ucomp"]} {
+        error "Both MIPI and HDMI inputs in the same project not supported with UNSTRUCTURED configuration. Please indicate MIPI or HDMI"
+    }
+}
 
 set install_loc [defvar_get -name ACTEL_SW_DIR]
 set mss_config_loc "$install_loc/bin64/pfsoc_mss"
 set local_dir [pwd]
 set src_path ./script_support
 set constraint_path ./script_support/constraint
-set release_tag "2024.2"
+set release_tag "2025.1"
 
 set project_name "VKPFSOC_VECTORBLOX"
-set project_dir "$local_dir/$project_name"
+set proj_type "${input_type}_$compression_type"
+set project_dir "$local_dir/${project_name}_$proj_type"
 
 source ./script_support/additional_configurations/functions.tcl
 #
@@ -76,7 +95,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 } else {
     puts "Creating a new project"
     new_project \
-	    -location $project_name \
+	    -location ${project_name}_$proj_type \
 	    -name $project_name \
 	    -project_description {} \
 	    -block_mode 0 \
@@ -114,24 +133,25 @@ if { [file exists $project_dir/$project_name.prjx] } {
     download_core -vlnv {Actel:DirectCore:CORERXIODBITALIGN:2.3.103} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microsemi:SolutionCore:Gamma_Correction:4.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microsemi:SolutionCore:IMAGE_SCALER:4.1.0} -location {www.microchip-ip.com/repositories/DirectCore}
-    download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:1.0.307} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:1.0.309} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Microchip:SolutionCore:mipicsi2rxdecoderPF:4.7.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:SgCore:PF_CCC:2.2.220} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_CLK_DIV:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.113} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_OSC:1.0.102} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_XCVR_REF_CLK:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:2.0.1} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:3.0.001} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microsemi:SolutionCore:Display_Controller:4.5.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:HDMI_RX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:HDMI_TX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:DDR_Read:1.2.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:SgCore:PF_TX_PLL:2.0.304} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.205} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.206} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_DDR4:2.5.120} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:DDR_AXI4_ARBITER_PF:2.2.0} -location {www.microchip-ip.com/repositories/DirectCore}
-
+    
+    #import_core -core {${src_path}/components/$compression_type/Microchip_SolutionCore_core_vectorblox_3.0.001.cpz} 
 
     #
     # // Generate base design
@@ -168,7 +188,8 @@ if { [file exists $project_dir/$project_name.prjx] } {
     # CLOCKS
     source ${src_path}/components/PFSOC_INIT_MONITOR_C0.tcl
     source ${src_path}/components/PF_CCC_C0.tcl
-    source ${src_path}/components/PF_CCC_VBX.tcl
+    source ${src_path}/components/$compression_type/PF_CCC_VBX.tcl
+    source ${src_path}/components/PF_CCC_VBX_1.tcl
     source ${src_path}/components/PF_CCC_170MCLK.tcl
     source ${src_path}/components/PF_CLK_DIV_C0.tcl
     source ${src_path}/components/PF_OSC_C0.tcl
@@ -204,20 +225,29 @@ if { [file exists $project_dir/$project_name.prjx] } {
     source ${src_path}/components/HDMI_RX_C0.tcl
     source ${src_path}/components/HDMI_TX_C0.tcl
     source ${src_path}/components/PF_TX_PLL_C0.tcl
-    source ${src_path}/components/PF_XCVR_ERM_C2.tcl
-#    source ${src_path}/components/Video_arbiter_top.tcl
+    source ${src_path}/components/$input_type/PF_XCVR_ERM_C2.tcl
     source ${src_path}/components/PF_DDR4_C0.tcl
-    source ${src_path}/components/Video_Pipeline_HDMI.tcl
+
+    source ${src_path}/components/Camera_subsys.tcl
+    source ${src_path}/components/$input_type/HDMI_subsys.tcl
+    source ${src_path}/components/video_input_subsys.tcl
+    source ${src_path}/components/video_out_subsys.tcl
+    source ${src_path}/components/$input_type/Video_Pipeline.tcl
+
+    build_design_hierarchy
+
+    # DDR Interconnect
+    source ${src_path}/components/$compression_type/COREAXI4INTERCONNECT_C0.tcl
+    source ${src_path}/components/$compression_type/DDR_AXI4_INTERCONNECT.tcl
 
     build_design_hierarchy
 
     #top level
-    source ${src_path}/components/COREAXI4INTERCONNECT_C0.tcl
     source ${src_path}/components/CoreAPB3_C0.tcl
     source ${src_path}/components/FIC_CONVERTER.tcl
     source ${src_path}/components/FIC0_INITIATOR.tcl
-    source ${src_path}/components/core_vectorblox_C0.tcl
-    source ${src_path}/components/VKPFSOC_TOP.tcl
+    source ${src_path}/components/$compression_type/core_vectorblox_C0.tcl
+    source ${src_path}/components/$input_type/VKPFSOC_TOP.tcl
     build_design_hierarchy
     set_root -module {VKPFSOC_TOP::work}
     #
@@ -233,23 +263,23 @@ if { [file exists $project_dir/$project_name.prjx] } {
 	    -io_pdc "${constraint_path}/io/VIDEO_KIT_MAC.pdc" \
 	    -io_pdc "${constraint_path}/io/VIDEO_KIT_MMUART0.pdc" \
 	    -io_pdc "${constraint_path}/io/VIDEO_KIT_MMUART1.pdc" \
-	    -io_pdc "${constraint_path}/io/user.pdc" \
+	    -io_pdc "${constraint_path}/io/user_$input_type.pdc" \
 
-    set_as_target -type {io_pdc} -file "${constraint_path}/io/user.pdc"
+    set_as_target -type {io_pdc} -file "${constraint_path}/io/user_$input_type.pdc"
 
     #
     # // Import floor planning constraints
     #
 
-    import_files -convert_EDN_to_HDL 0 -fp_pdc "${constraint_path}/fp/user.pdc"
+    import_files -convert_EDN_to_HDL 0 -fp_pdc "${constraint_path}/fp/user_$input_type.pdc"
     #
     # // Import timing constraint
     #
 
     import_files \
 	    -convert_EDN_to_HDL 0 \
-	    -sdc "${constraint_path}/user.sdc"
-    set_as_target -type {sdc} -file "${constraint_path}/user.sdc"
+	    -sdc "${constraint_path}/user_$input_type.sdc"
+    set_as_target -type {sdc} -file "${constraint_path}/user_$input_type.sdc"
     #
     # // Associate imported constraints with the design flow
     #
@@ -262,18 +292,18 @@ if { [file exists $project_dir/$project_name.prjx] } {
 	-file "${project_dir}/constraint/io/VIDEO_KIT_MAC.pdc" \
 	-file "${project_dir}/constraint/io/VIDEO_KIT_MMUART0.pdc" \
 	-file "${project_dir}/constraint/io/VIDEO_KIT_MMUART1.pdc" \
-	-file "${project_dir}/constraint/io/user.pdc" \
+	-file "${project_dir}/constraint/io/user_$input_type.pdc" \
 	-file "${project_dir}/constraint/VKPFSOC_TOP_derived_constraints.sdc" \
-	-file "${project_dir}/constraint/user.sdc" \
-	-file "${project_dir}/constraint/fp/user.pdc" \
+	-file "${project_dir}/constraint/user_$input_type.sdc" \
+	-file "${project_dir}/constraint/fp/user_$input_type.pdc" \
 	-module {VKPFSOC_TOP::work} \
 	-input_type {constraint}
 
-    set_as_target -type {io_pdc} -file "${project_dir}/constraint/io/user.pdc"
+    set_as_target -type {io_pdc} -file "${project_dir}/constraint/io/user_$input_type.pdc"
 
     organize_tool_files -tool {VERIFYTIMING} \
 	-file "${project_dir}/constraint/VKPFSOC_TOP_derived_constraints.sdc" \
-	-file "${project_dir}/constraint/user.sdc" \
+	-file "${project_dir}/constraint/user_$input_type.sdc" \
 	-module {VKPFSOC_TOP::work} \
 	-input_type {constraint}
 
@@ -284,6 +314,12 @@ if { [file exists $project_dir/$project_name.prjx] } {
 #
 # // Run the design flow and add eNVM clients
 #
+# if {[info exists UNSTRUCTURED]} {
+configure_tool -name {SYNTHESIZE} \
+    -params {AUTO_COMPILE_POINT:false} \
+    -params {ROM_TO_LOGIC:false}
+# }
+
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
 }
@@ -362,15 +398,15 @@ if {[info exists HSS_UPDATE]} {
 if {[info exists EXPORT_FPE]} {
     if {[info exists HSS_UPDATE]} {
         if {$EXPORT_FPE == 1} {
-            export_fpe_job $project_name $local_dir "ENVM FABRIC SNVM"
+            export_fpe_job ${project_name}_$proj_type $local_dir "ENVM FABRIC SNVM"
         } else {
-            export_fpe_job $project_name $EXPORT_FPE "ENVM FABRIC SNVM"
+            export_fpe_job ${project_name}_$proj_type $EXPORT_FPE "ENVM FABRIC SNVM"
         }
     } else {
         if {$EXPORT_FPE == 1} {
-            export_fpe_job $project_name $local_dir "FABRIC SNVM"
+            export_fpe_job ${project_name}_$proj_type $local_dir "FABRIC SNVM"
         } else {
-            export_fpe_job $project_name $EXPORT_FPE "FABRIC SNVM"
+            export_fpe_job ${project_name}_$proj_type $EXPORT_FPE "FABRIC SNVM"
         }
     }
 }

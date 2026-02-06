@@ -10,6 +10,7 @@ import_files -library work -hdl_source script_support/hdl/DDR_Frame_Blanker.v
 import_files -library work -hdl_source script_support/hdl/alpha_blend.vhd
 import_files -library work -hdl_source script_support/hdl/apb_wrapper.vhd
 import_files -library work -hdl_source script_support/hdl/ddr_dma_pkg.vhd
+import_files -library work -hdl_source script_support/hdl/ddr_dma_oimm_mux.vhd
 import_files -library work -hdl_source script_support/hdl/ddr_dma_oimm_register.vhd
 import_files -library work -hdl_source script_support/hdl/ddr_dma_oimm_throttler.vhd
 import_files -library work -hdl_source script_support/hdl/ddr_dma_to_axi.vhd

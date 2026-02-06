@@ -2,7 +2,7 @@
 # Family: PolarFireSoC
 # Part Number: MPFS250TS-1FCG1152I
 # Create and Configure the core component PF_DDR4_C0
-create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -component_name {PF_DDR4_C0} -params {\
+create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.120} -component_name {PF_DDR4_C0} -params {\
 "ADDRESS_MIRROR:false" \
 "ADDRESS_ORDERING:CHIP_ROW_BG_BANK_COL" \
 "AUTO_SELF_REFRESH:3" \
@@ -41,10 +41,6 @@ create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -comp
 "MEMCTRLR_INST_NO:0" \
 "MEMORY_FORMAT:COMPONENT" \
 "MINIMUM_READ_IDLE:1" \
-"ODT_ENABLE_RD_RNK0_ODT0:false" \
-"ODT_ENABLE_RD_RNK0_ODT1:false" \
-"ODT_ENABLE_RD_RNK1_ODT0:false" \
-"ODT_ENABLE_RD_RNK1_ODT1:false" \
 "ODT_ENABLE_WR_RNK0_ODT0:true" \
 "ODT_ENABLE_WR_RNK0_ODT1:false" \
 "ODT_ENABLE_WR_RNK1_ODT0:false" \
@@ -117,7 +113,7 @@ create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_DDR4:2.5.113} -comp
 "WRITE_PREAMBLE:0" \
 "ZQ_CALIB_PERIOD:200" \
 "ZQ_CALIB_TYPE:0" \
-"ZQ_CALIB_TYPE_TEMP:false" \
+"ZQ_CALIB_TYPE_TEMP:0" \
 "ZQ_CAL_INIT_TIME:1024" \
 "ZQ_CAL_L_TIME:512" \
 "ZQ_CAL_S_TIME:128" }

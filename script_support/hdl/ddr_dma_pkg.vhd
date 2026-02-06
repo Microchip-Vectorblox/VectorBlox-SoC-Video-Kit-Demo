@@ -74,6 +74,11 @@ package ddr_dma_pkg is
     )
     return integer;
 
+  function priority_encode_highest (
+    input_vector : std_logic_vector
+    )
+    return unsigned;
+
 end package ddr_dma_pkg;
 
 package body ddr_dma_pkg is
@@ -227,5 +232,23 @@ package body ddr_dma_pkg is
 
     return false_value;
   end function ternary;
+
+
+  function priority_encode_highest (
+    input_vector : std_logic_vector
+    )
+    return unsigned is
+    variable highest_bit : unsigned(log2(input_vector'length)-1 downto 0);
+  begin
+    highest_bit := to_unsigned(input_vector'length-1, highest_bit'length);
+
+    for ibit in 0 to input_vector'length-1 loop
+      if input_vector(input_vector'low+ibit) = '1' then
+        highest_bit := to_unsigned(ibit, highest_bit'length);
+      end if;
+    end loop;  -- ibit
+
+    return highest_bit;
+  end function priority_encode_highest;
 
 end ddr_dma_pkg;

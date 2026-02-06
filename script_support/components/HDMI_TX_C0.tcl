@@ -8,5 +8,7 @@ create_and_configure_core -core_vlnv {Microchip:SolutionCore:HDMI_TX:5.3.0} -com
 "g_BITS_PER_COMPONENT:8"  \
 "g_COLOR_FORMAT:0"  \
 "G_FORMAT:0"  \
+"g_HDMI2P1:0"  \
+"g_NO_OF_LANES:4"  \
 "g_PIXELS_PER_CLK:1"   }
 # Exporting Component Description of HDMI_TX_C0 to TCL done

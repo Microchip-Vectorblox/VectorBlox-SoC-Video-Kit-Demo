@@ -3,7 +3,6 @@
 create_hdl_core -file {hdl/ddr_dma_write_axi4.vhd} -module {ddr_dma_write_axi4} -library {work} -package {}
 # Exporting BIF information of  HDL core command for module ddr_dma_write_axi4
 hdl_core_add_bif -hdl_core_name {ddr_dma_write_axi4} -bif_definition {AXI4:AMBA:AMBA4:master} -bif_name {AXI4Master} -signal_map {\
-"AWID:AWID" \
 "AWADDR:AWADDR" \
 "AWLEN:AWLEN" \
 "AWSIZE:AWSIZE" \
@@ -35,4 +34,6 @@ hdl_core_add_bif -hdl_core_name {ddr_dma_write_axi4} -bif_definition {AXI4:AMBA:
 "RRESP:RRESP" \
 "RLAST:RLAST" \
 "RVALID:RVALID" \
-"RREADY:RREADY" }
+"RREADY:RREADY" \
+"AWID:AWID" }
+hdl_core_delete_parameters -hdl_core_name {ddr_dma_write_axi4} -parameters {AXI_ID_WIDTH}

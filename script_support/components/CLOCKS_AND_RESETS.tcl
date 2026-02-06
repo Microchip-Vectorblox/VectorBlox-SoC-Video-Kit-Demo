@@ -18,7 +18,8 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_150MHz} -port_directio
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_50MHz} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_HLS} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_MSS} -port_direction {OUT}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_VBX2} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_VBX_2X} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_VBX_CNN} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_VBX} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_VID_TX_170MHZ} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CLK_XCVR_REF} -port_direction {OUT}
@@ -32,6 +33,11 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {RESETN_HLS} -port_directio
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RESETN_MSS} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RESETN_VBX} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RESETN_VID170MHZ} -port_direction {OUT}
+
+
+
+# Add AND2_0 instance
+sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND2} -instance_name {AND2_0}
 
 
 
@@ -154,6 +160,11 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {PF_CCC_VBX} -insta
 
 
 
+# Add PF_CCC_VBX_1_0 instance
+sd_instantiate_component -sd_name ${sd_name} -component_name {PF_CCC_VBX_1} -instance_name {PF_CCC_VBX_1_0}
+
+
+
 # Add PF_CLK_DIV_C0_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {PF_CLK_DIV_C0} -instance_name {PF_CLK_DIV_C0_0}
 
@@ -170,6 +181,9 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {PF_XCVR_REF_CLK_C0
 
 
 # Add scalar net connections
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_0:A" "PF_CCC_VBX_0:PLL_LOCK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_0:B" "PF_CCC_VBX_1_0:PLL_LOCK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_0:Y" "AND4_0:D" "AND4_1:A" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_0:A" "AND4_0:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_0:B" "PF_CCC_170MCLK_0:PLL_LOCK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_0:C" "AND4_1:Y" "CORERESET_CLK_50MHz:PLL_LOCK" }
@@ -177,7 +191,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_0:Y" "CORERESET_CLK_DDR:PL
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:A" "DDR_PLL_LOCK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:B" "DDR_CTRLR_READY" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:C" "AND4_1:B" "PF_CCC_MAIN:PLL_LOCK_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:D" "AND4_1:A" "PF_CCC_VBX_0:PLL_LOCK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_1:C" "INIT_MONITOR_0:BANK_0_CALIB_STATUS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_1:D" "INIT_MONITOR_0:BANK_8_CALIB_STATUS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_150MHz" "PF_CCC_MAIN:OUT0_FABCLK_0" }
@@ -185,7 +198,8 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_50MHz" "CORERESET_CLK_50MHz
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_HLS" "CORERESET_CLK_HLS:CLK" "PF_CCC_MAIN:OUT2_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_MSS" "CORERESET_CLK_MSS:CLK" "PF_CCC_MAIN:OUT1_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VBX" "CORERESET_CLK_VBX_0:CLK" "PF_CCC_VBX_0:OUT1_FABCLK_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VBX2" "PF_CCC_VBX_0:OUT0_FABCLK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VBX_2X" "PF_CCC_VBX_0:OUT0_FABCLK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VBX_CNN" "PF_CCC_VBX_1_0:OUT0_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VID_TX_170MHZ" "CORERESET_CLK_VID_170MHZ:CLK" "PF_CCC_170MCLK_0:OUT0_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_XCVR_REF" "PF_XCVR_REF_CLK_C0_0:REF_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CORERESET_CLK_50MHz:EXT_RST_N" "CORERESET_CLK_DDR:EXT_RST_N" "CORERESET_CLK_DISP:EXT_RST_N" "CORERESET_CLK_HLS:EXT_RST_N" "CORERESET_CLK_MSS:EXT_RST_N" "CORERESET_CLK_VBX_0:EXT_RST_N" "CORERESET_CLK_VID_170MHZ:EXT_RST_N" "EXT_RST_N" }
@@ -201,7 +215,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CORERESET_CLK_MSS:FABRIC_RESET_
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CORERESET_CLK_VBX_0:FABRIC_RESET_N" "RESETN_VBX" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CORERESET_CLK_VID_170MHZ:FABRIC_RESET_N" "RESETN_VID170MHZ" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_BCLK" "PF_CLK_DIV_C0_0:CLK_OUT" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_170MCLK_0:REF_CLK_0" "PF_CCC_MAIN:REF_CLK_0" "PF_CCC_VBX_0:REF_CLK_0" "PF_XCVR_REF_CLK_C0_0:FAB_REF_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_170MCLK_0:REF_CLK_0" "PF_CCC_MAIN:REF_CLK_0" "PF_CCC_VBX_0:REF_CLK_0" "PF_CCC_VBX_1_0:REF_CLK_0" "PF_XCVR_REF_CLK_C0_0:FAB_REF_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CLK_DIV_C0_0:CLK_IN" "PF_OSC_C0_0:RCOSC_2MHZ_CLK_DIV" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_C0_0:REF_CLK_PAD_N" "REF_CLK_PAD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_C0_0:REF_CLK_PAD_P" "REF_CLK_PAD_P" }
