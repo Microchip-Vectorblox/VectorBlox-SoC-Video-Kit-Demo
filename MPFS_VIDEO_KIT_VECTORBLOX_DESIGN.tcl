@@ -11,7 +11,7 @@
 # // Check Libero version and path length to verify project can be created
 ##################################################################################
 ##################################################################################
-set libero_version 2025.1
+set libero_version 2025.2
 set my_platform "Linux"
 
 if {[string compare [string range [get_libero_version] 0 5] "$libero_version"]==0} {
@@ -79,7 +79,7 @@ set mss_config_loc "$install_loc/bin64/pfsoc_mss"
 set local_dir [pwd]
 set src_path ./script_support
 set constraint_path ./script_support/constraint
-set release_tag "2025.1"
+set release_tag "2025.2"
 
 set project_name "VKPFSOC_VECTORBLOX"
 set proj_type "${input_type}_$compression_type"
@@ -137,10 +137,10 @@ if { [file exists $project_dir/$project_name.prjx] } {
     download_core -vlnv {Microchip:SolutionCore:mipicsi2rxdecoderPF:4.7.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Actel:SgCore:PF_CCC:2.2.220} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_CLK_DIV:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.113} -location {www.microchip-ip.com/repositories/SgCore}
+    download_core -vlnv {Actel:SystemBuilder:PF_IOD_GENERIC_RX:2.1.116} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_OSC:1.0.102} -location {www.microchip-ip.com/repositories/SgCore}
     download_core -vlnv {Actel:SgCore:PF_XCVR_REF_CLK:1.0.103} -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:3.0.001} -location {www.microchip-ip.com/repositories/DirectCore}
+    download_core -vlnv {Microchip:SolutionCore:core_vectorblox:3.1.001} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microsemi:SolutionCore:Display_Controller:4.5.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:HDMI_RX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}
     download_core -vlnv {Microchip:SolutionCore:HDMI_TX:5.3.0} -location {www.microchip-ip.com/repositories/DirectCore}

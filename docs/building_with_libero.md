@@ -1,27 +1,25 @@
-# Building with Libero v2025.1 Setup Guide
-### Licensing
+# Building with Libero SoC Setup Guide
 
-If building the Video Kit VectorBlox Design in Libero, two free licences -- `Libero SoC Silver License` and `Libero Soc VectorBlox License` are required. Licensing information is available on the Microchip website [here](https://www.microchip.com/en-us/products/fpgas-and-plds/fpga-and-soc-design-tools/fpga/licensing).
+## Licensing
 
+If building the Video Kit VectorBlox Design in Libero, two free licenses are required: `Libero SoC Silver License` and `Libero SoC VectorBlox License`. Licensing information is available on the Microchip website [here](https://www.microchip.com/en-us/products/fpgas-and-plds/fpga-and-soc-design-tools/fpga/licensing).
 
 ## Using the VectorBlox Design Generation Tcl Script
 
-
 ### Standard Design Generation
 
-To generate the Vectorblox demo design, the following flow can be used:
+To generate the VectorBlox demo design, the following flow can be used:
 
 1. Clone or download the repository
-2. Open Libero v2025.1
-3. Open the execute script dialog (CTRL + U)
+2. Open Libero SoC
+3. Open the execute script dialog (CTRL + U) from the Welcome Page
 4. Execute the "MPFS_VIDEO_KIT_REFERENCE_DESIGN.tcl" script
 5. Configure the design if required
 6. Run the Libero SoC design flow to program a device
 
-
 ### Arguments Supported
 
-Below arguments are supported to modify or configure aspects of the design flow that will be run. Supported arguments are:
+If you want to build the smart design in a Libero Project without compiling it (synthesis, place and route, etc.), do not specify any arguments for the Tcl script. The following arguments are supported to modify or configure aspects of the design flow that will be run:  
 
 | Argument                  | Description                                                                                                                                |
 | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------|
@@ -32,30 +30,38 @@ Below arguments are supported to modify or configure aspects of the design flow 
 | GENERATE_PROGRAMMING_DATA | Generates the files required to generate a bitstream for programming a device                                         |
 | EXPORT_FPE                | Runs the full design flow after generating a design and exports a FlashPro Express file to the local directory                              |
 
-### Additional Arguments
-By default, the project is generated with both HDMI and MIPI inputs, and the VectorBlox IP is configured with no compression support. Currently, the unstructured compression configuration is supported for either HDMI or MIPI input, while the compression configuration is supported for both.  
+### Optional Arguments
+
+By default, the project is generated with both HDMI and MIPI inputs, and the VectorBlox IP is configured with no compression support. When getting started, it is recommended to use no compression. To do this, pass no arguments for compression and input. This will cause the .tcl to default to no compression and both MIPI & HDMI input. Currently, the unstructured compression configuration is supported for either HDMI or MIPI input, while the compression configuration is supported for both. For more information on unstructured compression and compression, please refer to the [VectorBlox-Compression Repo](https://github.com/Microchip-Vectorblox/VectorBlox-Compression) on GitHub.
 
 #### Compression Arguments
 
-| Argument                  | Description                                                                                                                                |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------|
-| COMP    |  Generates the project with support for compression |
-| UCOMP   |  Generates the project with support for unstructured compression     |
-                             
+| Argument | Description                                                     |
+| :------- | :-------------------------------------------------------------- |
+| COMP     | Generates the project with support for compression              |
+| UCOMP    | Generates the project with support for unstructured compression |
+
 #### Input Arguments
-| Argument                  | Description                                                                                                                                |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------|
-| HDMI    |  Generates the project with only HDMI input |
-| MIPI    |  Generates the project with only MIPI camera input |
 
-
+| Argument | Description                                       |
+| :------- | :------------------------------------------------ |
+| HDMI     | Generates the project with only HDMI input        |
+| MIPI     | Generates the project with only MIPI camera input |
 
 ### Programming the FPGA
 
-Once the script has completed the design can be configured further if needed and the Libero SoC design flow can be run by double clicking on a stage in the design flow on the left hand side of Libero. Selecting an option requiring previous steps to be completed will run the full flow, i.e double clicking "Run Program Action" will run any required steps, such as, "Synthesize", "Place and Route", etc and then program the device.
+After the script completes, you can further configure the design and run the Libero SoC design flow by double-clicking any stage in the design flow panel (left side of Libero). Selecting a stage that requires previous steps will automatically run the complete flow up to that point.  
+
+For example, double-clicking "Run Program Action" will automatically execute all necessary steps (Synthesize, Place and Route, etc.) and then program the device. When using "Run Program Action," the device is programmed directly, eliminating the need for a separate job file.
 
 ### Next Steps
 
-Once the device has been programmed, please refer to the [Quickstart Setup Guide](./Quickstart.md). Complete all steps in the quickstart guide, and in step 3 of the quickstart, use the job file that was exported by Libero to program the board.
+**If you programmed the device using "Run Program Action" in Libero:**
 
+Complete all steps in the [Quickstart Setup Guide](./Quickstart.md), **skipping "Step 3: Programming the Job File"** (your device is already programmed).
 
+**If you plan to program the device with the .job file generated from Libero:**
+
+1. Click "Export FlashPro Express Job" in Libero to generate a job file
+2. Complete all steps in the [Quickstart Setup Guide](./Quickstart.md)
+3. Use the generated job file from Libero in "Step 3: Programming the Job File"
