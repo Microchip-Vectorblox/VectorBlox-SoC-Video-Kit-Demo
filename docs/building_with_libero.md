@@ -23,7 +23,7 @@ If you want to build the smart design in a Libero Project without compiling it (
 
 | Argument                  | Description                                                                                                                                |
 | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------|
-| HSS_UPDATE                | Downloads the HSS release hex file associated with this release of the reference design. <br>The hex file is added as an eNVM client in Libero. <br>This argument requires wget to be installed. <br>This is installed by default on most Linux systems, on Windows® wget (version 1.14 or above) <br>should be installed and added to the system path, steps are shown in the following [guide](https://www.addictivetips.com/windows-tips/install-and-use-wget-in-windows-10/) |
+| HSS_UPDATE                | Downloads the HSS release hex file associated with this release of the reference design. <br>The hex file is added as an eNVM client in Libero. <br>This argument requires wget to be installed. <br>This is installed by default on most Linux systems; on Windows®, wget (version 1.14 or above) <br>should be installed and added to the system path. Steps are shown in the following [guide](https://www.addictivetips.com/windows-tips/install-and-use-wget-in-windows-10/) |
 | SYNTHESIZE                | Runs the synthesis step after design generation has completed                                                         |
 | PLACEROUTE                | Runs the synthesis and place and route steps after design generation has completed                                    |
 | VERIFY_TIMING             | Runs the synthesis, place and route and timing verification steps after design generation has completed               |
@@ -32,7 +32,7 @@ If you want to build the smart design in a Libero Project without compiling it (
 
 ### Optional Arguments
 
-By default, the project is generated with both HDMI and MIPI inputs, and the VectorBlox IP is configured with no compression support. When getting started, it is recommended to use no compression. To do this, pass no arguments for compression and input. This will cause the .tcl to default to no compression and both MIPI & HDMI input. Currently, the unstructured compression configuration is supported for either HDMI or MIPI input, while the compression configuration is supported for both. For more information on unstructured compression and compression, please refer to the [VectorBlox-Compression Repo](https://github.com/Microchip-Vectorblox/VectorBlox-Compression) on GitHub.
+By default, the project generates both HDMI and MIPI inputs, and the VectorBlox IP is configured with no compression support. When getting started, we recommend using no compression. To do this, pass no arguments for compression and input. This will cause the .tcl to default to no compression and both MIPI & HDMI input. Currently, unstructured compression is supported for either HDMI or MIPI input, while compression is supported for both. For more information on unstructured compression and compression, please refer to the [VectorBlox-Compression Repo](https://github.com/Microchip-Vectorblox/VectorBlox-Compression) on GitHub.
 
 #### Compression Arguments
 
@@ -52,7 +52,7 @@ By default, the project is generated with both HDMI and MIPI inputs, and the Vec
 
 After the script completes, you can further configure the design and run the Libero SoC design flow by double-clicking any stage in the design flow panel (left side of Libero). Selecting a stage that requires previous steps will automatically run the complete flow up to that point.  
 
-For example, double-clicking "Run Program Action" will automatically execute all necessary steps (Synthesize, Place and Route, etc.) and then program the device. When using "Run Program Action," the device is programmed directly, eliminating the need for a separate job file.
+For example, double-clicking "Run Program Action" automatically executes all necessary steps (Synthesize, Place and Route, etc.) and then programs the device when you use "Run Program Action," the device programs directly, eliminating the need for a separate job file.
 
 ### Next Steps
 

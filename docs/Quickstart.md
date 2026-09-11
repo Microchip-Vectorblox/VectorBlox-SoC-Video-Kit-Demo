@@ -80,7 +80,7 @@ The highlighted areas in the image indicate the required hardware connections.
 
 Programming the [job](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases) file will program the FPGA fabric with the latest reference configuration and program the eNVM with the latest HSS payload. The .zip file in the release assets should be downloaded and extracted to access the programming job file.
 
-- **Click [this link](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.1/Vectorblox-SoC-Video-Kit-Demo.job.v3.1.zip) to download the no compression V1000 job file for VectorBlox 3.1**
+- **Click [this link](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.1.1/Vectorblox-SoC-Video-Kit-Demo.job.v3.1.1.zip) to download the no compression V1000 job file for VectorBlox 3.1.1**
 - Ensure that J5 and J12 USB cables are connected to the board.
 - Follow the steps to set up the serial terminal so the computer can communicate with the FPGA's UART.
 - Load the `.job` file in FlashPro Express as a New Project under the Project tab in the menu and then select `Run`.
@@ -122,7 +122,7 @@ The VectorBlox SoC Video Kit Demo is designed to operate on the 2023.02.1 Yocto 
     wget --no-check-certificate https://raw.githubusercontent.com/Microchip-Vectorblox/assets/refs/heads/main/quick_start_3.sh 
     ```
 
-3. The `quick_start_3.sh` script accepts a version parameter (defaults to `3.1`). This feature requires VectorBlox 3.0 or higher; for older versions, refer to the corresponding release tag.
+3. The `quick_start_3.sh` script accepts a version parameter (defaults to `3.1.1`). This feature requires VectorBlox 3.0 or higher; for older versions, refer to the corresponding release tag.
 
     For a default NCOMP (no compression) .job file:
 
@@ -133,13 +133,13 @@ The VectorBlox SoC Video Kit Demo is designed to operate on the 2023.02.1 Yocto 
    For a COMP (compression) .job file:
 
     ```bash
-    bash quick_start_3.sh 3.1 COMP
+    bash quick_start_3.sh 3.1.1 COMP
     ```
 
    For a UCOMP (unstructured compression) .job file:
 
     ```bash
-    bash quick_start_3.sh 3.1 UCOMP
+    bash quick_start_3.sh 3.1.1 UCOMP
     ```
 
 #### Important Notes
