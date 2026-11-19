@@ -81,13 +81,13 @@ sd_create_bus_port -sd_name ${sd_name} -port_name {ARBITER_MSLAVE_AXI4_bresp} -p
 sd_create_bus_port -sd_name ${sd_name} -port_name {ARBITER_MSLAVE_AXI4_rdata} -port_direction {IN} -port_range {[511:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {ARBITER_MSLAVE_AXI4_rid} -port_direction {IN} -port_range {[3:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {ARBITER_MSLAVE_AXI4_rresp} -port_direction {IN} -port_range {[1:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {CAM1_RXD_N} -port_direction {IN} -port_range {[3:0]} -port_is_pad {1}
-sd_create_bus_port -sd_name ${sd_name} -port_name {CAM1_RXD} -port_direction {IN} -port_range {[3:0]} -port_is_pad {1}
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4M_scaler_BID} -port_direction {IN} -port_range {[2:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4M_scaler_BRESP} -port_direction {IN} -port_range {[1:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4M_scaler_RDATA} -port_direction {IN} -port_range {[255:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4M_scaler_RID} -port_direction {IN} -port_range {[2:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4M_scaler_RRESP} -port_direction {IN} -port_range {[1:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {CAM1_RXD_N} -port_direction {IN} -port_range {[3:0]} -port_is_pad {1}
+sd_create_bus_port -sd_name ${sd_name} -port_name {CAM1_RXD} -port_direction {IN} -port_range {[3:0]} -port_is_pad {1}
 
 sd_create_bus_port -sd_name ${sd_name} -port_name {APB_IF_prdata_o} -port_direction {OUT} -port_range {[31:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {ARBITER_MSLAVE_AXI4_araddr} -port_direction {OUT} -port_range {[31:0]}

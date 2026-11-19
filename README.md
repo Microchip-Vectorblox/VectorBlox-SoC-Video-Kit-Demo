@@ -1,11 +1,11 @@
 
 ![](media/demo.gif)
 
-# PolarFire&reg; SoC Video Kit VectorBlox 3.1.1 Demo
+# PolarFire&reg; SoC Video Kit VectorBlox 3.2 Demo
 
 This repository generates a VectorBlox demo using the [PolarFire&reg; SoC Video Kit](https://www.microchip.com/en-us/development-tool/MPFS250-VIDEO-KIT). A Libero SoC Tcl script generates the design using Libero SoC and includes device-specific I/O constraints.
 
-This repository supports Libero SoC v2025.2, which is available for download [here](https://www.microsemi.com/product-directory/design-resources/1750-libero-soc#downloads).
+This repository supports Libero SoC v2026.1, which is available for download [here](https://www.microsemi.com/product-directory/design-resources/1750-libero-soc#downloads).
 
 
 ## Table of Contents
@@ -25,7 +25,7 @@ To run the demo on the PolarFire SoC Video Kit without building, using the pre-b
 
 ## Building with Libero Setup Guide
 
-For instructions on building the project with a Tcl script in Libero SoC v2025.1 or generating a custom job file, refer to the [Building with Libero Setup Guide](docs/building_with_libero.md).
+For instructions on building the project with a Tcl script in Libero SoC v2026.1 or generating a custom job file, refer to the [Building with Libero Setup Guide](docs/building_with_libero.md).
 
 ## Controlling the VectorBlox Demo
 
@@ -60,7 +60,9 @@ Refer to the following table for previous version compatibility information for 
 
 | VBX SoC Video Demo Release Tags                                                                                                     | VBX SDK Release Tags                                                                                 | .job File                                                                                                                                                               | Libero Version     | FlashPro Version  |
 | :---------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------- | :---------------- |
-| [demo-release-v3.0](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v3.0?tab=readme-ov-file)     | [sdk-release-v3.0](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v3.0)         | [v3.0_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.0/Vectorblox-Video-Kit-Demo.job.v3.0.zip)     | Libero SoC v2025.1 | FPExpress v2025.1 |
+| [demo-release-v3.1.1](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v3.1.1?tab=readme-ov-file)     | [sdk-release-v3.1.1](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v3.1.1)         | [v3.1.1_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.1.1/Vectorblox-SoC-Video-Kit-Demo.job.v3.1.1.zip)     | Libero SoC v2025.2 | FPExpress v2025.2 |
+| [demo-release-v3.1](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v3.1?tab=readme-ov-file)     | [sdk-release-v3.1](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v3.1)         | [v3.1_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.1/Vectorblox-SoC-Video-Kit-Demo.job.v3.1.zip)     | Libero SoC v2025.2 | FPExpress v2025.2 |
+| [demo-release-v3.0](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v3.0?tab=readme-ov-file)     | [sdk-release-v3.0](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v3.0)         | [v3.0_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v3.0/Vectorblox-SoC-Video-Kit-Demo.job.v3.0.zip)     | Libero SoC v2025.1 | FPExpress v2025.1 |
 | [demo-release-v2.0.3](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v2.0.3?tab=readme-ov-file) | [sdk-release-v2.0.3](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v2.0.3)     | [v2.0.3_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v2.0.3/Vectorblox-SoC-Video-Kit-Demo.job.v2.0.3.zip) | Libero SoC v2024.2 | FPExpress v2024.2 |
 | [demo-release-v2.0.2](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v2.0.2?tab=readme-ov-file) | [sdk-release-v2.0.2](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v2.0.2)     | [v2.0.2_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v2.0.2/Vectorblox-SoC-Video-Kit-Demo.job.v2.0.2.zip) | Libero SoC v2024.2 | FPExpress v2024.2 |
 | [demo-release-v2.0.1](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/tree/release-v2.0.1?tab=readme-ov-file) | [sdk-release-v2.0.1](https://github.com/Microchip-Vectorblox/VectorBlox-SDK/tree/release-v2.0.1)     | [v2.0.1_JOB_FILE](https://github.com/Microchip-Vectorblox/VectorBlox-SoC-Video-Kit-Demo/releases/download/release-v2.0.1/Vectorblox-SoC-Video-Kit-Demo.job.v2.0.1.zip) | Libero SoC v2024.2 | FPExpress v2024.2 |
