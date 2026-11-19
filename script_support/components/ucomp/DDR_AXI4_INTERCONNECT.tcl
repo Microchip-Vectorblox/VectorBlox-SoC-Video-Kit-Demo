@@ -267,8 +267,8 @@ sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTE
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_AWREGION} -port_direction {IN} -port_range {[3:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_AWSIZE} -port_direction {IN} -port_range {[2:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_AWUSER} -port_direction {IN} -port_range {[0:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_WDATA} -port_direction {IN} -port_range {[255:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_WSTRB} -port_direction {IN} -port_range {[31:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_WDATA} -port_direction {IN} -port_range {[127:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_WSTRB} -port_direction {IN} -port_range {[15:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_WUSER} -port_direction {IN} -port_range {[0:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_ARADDR} -port_direction {IN} -port_range {[31:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_ARBURST} -port_direction {IN} -port_range {[1:0]}
@@ -292,8 +292,8 @@ sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTE
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_AWREGION} -port_direction {IN} -port_range {[3:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_AWSIZE} -port_direction {IN} -port_range {[2:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_AWUSER} -port_direction {IN} -port_range {[0:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_WDATA} -port_direction {IN} -port_range {[255:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_WSTRB} -port_direction {IN} -port_range {[31:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_WDATA} -port_direction {IN} -port_range {[127:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_WSTRB} -port_direction {IN} -port_range {[15:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_WUSER} -port_direction {IN} -port_range {[0:0]}
 
 sd_create_bus_port -sd_name ${sd_name} -port_name {AXI4mslave0_SLAVE0_ARADDR} -port_direction {OUT} -port_range {[31:0]}
@@ -359,14 +359,14 @@ sd_create_bus_port -sd_name ${sd_name} -port_name {Video_Pipeline_scaler_AXI4M_M
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_BID} -port_direction {OUT} -port_range {[7:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_BRESP} -port_direction {OUT} -port_range {[1:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_BUSER} -port_direction {OUT} -port_range {[0:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_RDATA} -port_direction {OUT} -port_range {[255:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_RDATA} -port_direction {OUT} -port_range {[127:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_RID} -port_direction {OUT} -port_range {[7:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_RRESP} -port_direction {OUT} -port_range {[1:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M0_AXIM_MASTER1_RUSER} -port_direction {OUT} -port_range {[0:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_BID} -port_direction {OUT} -port_range {[7:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_BRESP} -port_direction {OUT} -port_range {[1:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_BUSER} -port_direction {OUT} -port_range {[0:0]}
-sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_RDATA} -port_direction {OUT} -port_range {[255:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_RDATA} -port_direction {OUT} -port_range {[127:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_RID} -port_direction {OUT} -port_range {[7:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_RRESP} -port_direction {OUT} -port_range {[1:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {core_vectorblox_M1_AXIM_MASTER6_RUSER} -port_direction {OUT} -port_range {[0:0]}
@@ -751,7 +751,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_DDR" "COREAXI4INTERCONNECT_
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_HLS" "COREAXI4INTERCONNECT_C0_0:M_CLK2" "COREAXI4INTERCONNECT_C0_0:M_CLK3" "COREAXI4INTERCONNECT_C0_0:M_CLK4" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_MSS" "COREAXI4INTERCONNECT_C0_0:M_CLK0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_VBX" "COREAXI4INTERCONNECT_C0_0:ACLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:ARESETN" "RESETN_MSS" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"COREAXI4INTERCONNECT_C0_0:ARESETN" "RESETN_VBX" }
 
 
 # Add bus interface net connections

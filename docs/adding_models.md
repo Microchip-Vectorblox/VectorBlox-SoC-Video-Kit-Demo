@@ -16,10 +16,14 @@ Below is an example from the `demo_models.h` file in the `soc-video-c` directory
 
 ```c++
 struct model_descr_t models[] = {
- {"Yolo v8n", "/home/root/samples/yolov8n.vnnx", 0, "ULTRALYTICS_CUT"},
- {"SCRFD", "/home/root/samples/scrfd_500m_bnkps.vnnx", 0, "SCRFD"},
- {"mobileface-arcface", "/home/root/samples/mobilefacenet-arcface.vnnx", 0, "ARCFACE"},
- {"MobileNet V2", "/home/root/samples/mobilenet-v2.vnnx", 0, "IMAGENET"},
+ {"Yolo v8n", "/home/root/samples/yolov8n_512x288_argmax_V1000_ncomp.vnnx", 0, "OBJECT_DETECT"},
+ {"YuNet Face Detect", "/home/root/samples/face_detection_yunet_2023mar_V1000_ncomp.vnnx", 0, "YUNET"},
+ {"SFace Recognition ", "/home/root/samples/face_recognition_sface_2021dec_V1000_ncomp.vnnx", 0, "ARCFACE"},
+ {"Yolo v9s SPN Aspect", "/home/root/samples/yolov9s-spn_800x480_V1000_ncomp.vnnx", 0, "SPACE"},
+ {"MobileNet V2", "/home/root/samples/mobilenet-v2_V1000_ncomp.vnnx", 0, "CLASSIFY"},
+ {"Yolov8 Pose", "/home/root/samples/yolov8n-pose_512x288_split_V1000_ncomp.vnnx", 0, "POSE_DETECT"},
+ {"FFNet 122NS", "/home/root/samples/FFNet-122NS-LowRes_512x288_V1000_ncomp.vnnx", 0, "PIXEL"},
+ {"Midas V2", "/home/root/samples/Midas-V2-Quantized_V1000_ncomp.vnnx", 0, "PIXEL"},
 };
 ```
 
@@ -27,10 +31,14 @@ Assuming the generated model file was named `yolov8n-cls.vnnx` and that it was t
 
 ```c++
 struct model_descr_t models[] = {
- {"Yolo v8n", "/home/root/sample/yolov8n.vnnx", 0, "ULTRALYTICS_CUT"},
- {"SCRFD", "/home/root/samples/scrfd_500m_bnkps.vnnx", 0, "SCRFD"},
- {"mobileface-arcface", "/home/root/samples/mobilefacenet-arcface.vnnx", 0, "ARCFACE"},
- {"MobileNet V2", "/home/root/samples/mobilenet-v2.vnnx", 0, "IMAGENET"},
+ {"Yolo v8n", "/home/root/samples/yolov8n_512x288_argmax_V1000_ncomp.vnnx", 0, "OBJECT_DETECT"},
+ {"YuNet Face Detect", "/home/root/samples/face_detection_yunet_2023mar_V1000_ncomp.vnnx", 0, "YUNET"},
+ {"SFace Recognition ", "/home/root/samples/face_recognition_sface_2021dec_V1000_ncomp.vnnx", 0, "ARCFACE"},
+ {"Yolo v9s SPN Aspect", "/home/root/samples/yolov9s-spn_800x480_V1000_ncomp.vnnx", 0, "SPACE"},
+ {"MobileNet V2", "/home/root/samples/mobilenet-v2_V1000_ncomp.vnnx", 0, "CLASSIFY"},
+ {"Yolov8 Pose", "/home/root/samples/yolov8n-pose_512x288_split_V1000_ncomp.vnnx", 0, "POSE_DETECT"},
+ {"FFNet 122NS", "/home/root/samples/FFNet-122NS-LowRes_512x288_V1000_ncomp.vnnx", 0, "PIXEL"},
+ {"Midas V2", "/home/root/samples/Midas-V2-Quantized_V1000_ncomp.vnnx", 0, "PIXEL"},
  {"Yolo v8n Classifier", "/home/root/samples/yolov8n-cls.vnnx", 0, "CLASSIFY"},
 };
 ```

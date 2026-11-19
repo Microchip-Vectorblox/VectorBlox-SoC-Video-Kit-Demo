@@ -247,7 +247,6 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_0_DLL_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_1_DLL_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_2_DLL_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_3_DLL_LOCK_M2F}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_3_APB_M_PSTRB}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:MMUART_0_TXD_OE_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:MMUART_1_TXD_OE_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:GPIO_2_M2F_9}
@@ -255,10 +254,11 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:GPIO_2_M2F_8}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:GPIO_2_M2F_3}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:GPIO_2_M2F_2}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:GPIO_2_M2F_1}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:MSS_INT_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:PLL_CPU_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:PLL_DDR_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:PLL_SGMII_LOCK_M2F}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_3_APB_M_PSTRB}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:MSS_INT_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_0_AXI4_TARGET}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_1_AXI4_TARGET}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MSS:FIC_2_AXI4_TARGET}
